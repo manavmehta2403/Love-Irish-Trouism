@@ -1,0 +1,232 @@
+﻿<Window x:Class="LIT.Old_LIT.Sendpdfemail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LIT.Old_LIT"
+        mc:Ignorable="d"
+        Title="Customer Communication" Height="550" Width="815" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/PasswordBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ButtonStyles.xaml"/>
+
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ScrollBarStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#f5f5f5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <!-- Automatically adjust to content -->
+            <RowDefinition Height="Auto"/>
+            <!-- Takes the remaining space -->
+            <RowDefinition Height="Auto"/>
+            <!-- Automatically adjust to content -->
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />                    
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,5">
+                    <Label Name="lblemailtemp" Content="Edit customer email" FontFamily="Calibri" FontSize="16" FontWeight="Bold" Foreground="#25304c" Padding="0,5"></Label>
+                    
+                </DockPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right"  MinWidth="10">
+                    <CheckBox x:Name="SavePdfChecked" Content="Save Pdf" HorizontalAlignment="Right" Margin="0,8,20,0" BorderBrush="#FFA1A1A1" FontFamily="Calibri" FontSize="14"/>
+                    <Button Style="{StaticResource btnBlue}" x:Name="btnPreviousCustEmailid" Height="30" FontFamily="Calibri" FontSize="16" Background="Transparent" FontWeight="Bold" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,8,0" VerticalAlignment="Bottom" Click="btnPreviousCustEmailid_Click" >
+                        <Image Width="15" Source="/LIT.Core;component/Media/Images/prev-arrow.png" ></Image>
+                    </Button>
+                    <Button Style="{StaticResource btnBlue}" x:Name="btnNextCustEmailid" Height="30" FontFamily="Calibri" FontSize="16" Background="Transparent" FontWeight="Bold" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Click="btnNextCustEmailid_Click">
+                        <Image Width="15" Source="/LIT.Core;component/Media/Images/next-arrow.png" ></Image>
+                    </Button>
+                </StackPanel>
+                <Border Background="#f5f5f5" BorderBrush="#c9c9c9" BorderThickness="1,1,1,1" VerticalAlignment="Bottom" CornerRadius="0" Margin="1,1,1,0" Padding="0, 1" Height="1"></Border>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="200" Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <!--<StackPanel Grid.Row="0" Grid.Column="0">
+                    <TextBlock Name="lblemailtmp" TextTrimming="CharacterEllipsis" FontFamily="Calibri" FontSize="14" FontWeight="Regular" Padding="0,10" Foreground="#25304c">
+                            These screen allows you to view and edit emails.
+                    </TextBlock>
+                </StackPanel>-->
+            </Grid>
+            <Grid Margin="10,5,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition  Width="39"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Label Name="lblfrom" Foreground="#25304c" Content="From" FontFamily="Calibri" FontSize="14" FontWeight="Regular" HorizontalAlignment="Left"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                    <TextBox Padding="5" x:Name="txtfrom" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="Calibri" FontSize="14" FontWeight="Regular" VerticalAlignment="Center" Margin="0,0,0,0"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"  HorizontalAlignment="Stretch">
+                    <Image Source="/LIT.Core;component/Media/Images/from_icon.png" MaxWidth="25px" HorizontalAlignment="Right" Margin="15,0,0,0"></Image>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="10,5,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition  Width="39"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Label Name="lblTo" Foreground="#25304c" Content="To" FontFamily="Calibri" FontSize="14" FontWeight="Regular" HorizontalAlignment="Left"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" >
+                    <TextBox Padding="5" x:Name="txtTo" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="Calibri" FontSize="14" FontWeight="Regular" VerticalAlignment="Center" Margin="0,0,0,0" LostFocus="txtTo_LostFocus"></TextBox>
+                    
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"  HorizontalAlignment="Stretch">
+                    <Image Source="/LIT.Core;component/Media/Images/sendEmail.png" MaxWidth="25px" HorizontalAlignment="Right" Margin="15,0,0,0"></Image>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="10,5,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition  Width="39"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Label Name="lblsubject" Foreground="#25304c" Content="Subject" FontFamily="Calibri" FontSize="14" FontWeight="Regular" HorizontalAlignment="Left"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                    <TextBox Padding="5" x:Name="txtsubject" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" FontFamily="Calibri" FontSize="14" FontWeight="Regular"  VerticalAlignment="Center" Margin="0,0,0,0"></TextBox>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <Grid Margin="15,15,10,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <!--<TextBlock Grid.Row="0" Grid.Column="0"  x:Name="txtTemplateContents" FontFamily="Calibri" Width="775" Height="220" FontSize="14" Padding="5" TextWrapping="Wrap"  Margin="0,0,0,0">
+                    </TextBlock>-->
+                <TextBox x:Name="webbrowserEmailEdit" HorizontalAlignment="Stretch"  Grid.Row="0" Grid.Column="0"  Height="220"  Margin="0,0,0,0" 
+                             AcceptsReturn="True" 
+                             VerticalScrollBarVisibility="Auto" 
+                             HorizontalScrollBarVisibility="Auto" 
+                             TextWrapping="Wrap" LostFocus="webbrowserEmailEdit_LostFocus" />
+                <!--<RichTextBox Grid.Row="0" Grid.Column="0"  x:Name="txtrchTemplateContents" FontFamily="Calibri" Width="775" Height="220" FontSize="14" Padding="5" Margin="0,0,0,0"></RichTextBox>-->
+                <!--<wv2:WebView2 Name="mywebview" Grid.Row="0" Grid.Column="0" Source="{Binding HtmlWebViewSource}"  Width="775" Height="220">
+                        
+                    </wv2:WebView2>-->
+
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+                    <Label Name="At" Content="Attachment" Foreground="#25304c" FontFamily="Calibri" FontSize="14" FontWeight="Regular">
+
+                    </Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                    <TextBox IsReadOnly="True" Padding="5,5,5,5" x:Name="txtfileupload" FontFamily="Calibri" FontSize="14" FontWeight="Regular" HorizontalScrollBarVisibility="Auto" AcceptsReturn="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,0,0">
+                    <!--<Button Width="180" Name="btnupload"  VerticalAlignment="Center" HorizontalAlignment="Right" Background="#f5f5f5" BorderThickness="0" Height="30" Margin="0,0,0,0" Click="btnupload_Click">-->
+
+                    <Grid>
+
+
+                        <!--<Image Grid.Column="0" Grid.Row="0" Width="10" Source="Images/paperClip.png" Margin="0,0,5,0"></Image>-->
+                        <!--<TextBlock Grid.Column="1" Grid.Row="0" Text="Browse" VerticalAlignment="Center" />-->
+                        <Button Click="AttachButton_Click" Width="75" Height="25" Cursor="Hand" IsEnabled="False">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="/LIT.Core;component/Media/Images/paperClip.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                                    <TextBlock HorizontalAlignment="Center" FontWeight="Medium" TextAlignment="Center" Margin="0,2,0,0">Attach</TextBlock>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <TextBox x:Name="fullfilepath" Visibility="Hidden"></TextBox>
+                    </Grid>
+                    <!--</Button>-->
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+        <StackPanel Grid.Row="4">
+            <Grid Margin="10,50,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="590" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                    <Button Click="SendButton_Click" Content="Send" Name="btnNext" Template="{StaticResource ButtonBaseTemplate}"  Padding="26,4,5,5" VerticalAlignment="Center" Margin="0,0,0,0" VerticalContentAlignment="Center" FontFamily="Calibri" Height="28" FontSize="14"  BorderBrush="#c9c9c9" Foreground="#252e39" FontWeight="Normal" MaxWidth="140" Width="80" Cursor="Hand" >
+                        <Button.Background>
+                            <SolidColorBrush Color="White" Opacity="1"/>
+                        </Button.Background>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center">
+                    <Button Content="Cancel" Name="btnCancel" Template="{StaticResource ButtonBaseTemplate}"  Padding="20,4,5,5" VerticalAlignment="Center" Margin="0,0,0,0" VerticalContentAlignment="Center" FontFamily="Calibri" Height="28" FontSize="14"  BorderBrush="#c9c9c9" Foreground="#252e39" FontWeight="Normal" MaxWidth="140" Width="80" Cursor="Hand" Click="btnCancel_Click" >
+                        <Button.Background>
+                            <SolidColorBrush Color="White" Opacity="1"/>
+                        </Button.Background>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

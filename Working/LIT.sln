@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{52F3056C-C3AC-4F5C-88AF-AE05EA32B43B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E62A3808-81D7-4329-A6D4-9929B600C3EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LIT", "LIT\LIT\LIT.csproj", "{196D7E0B-4A36-4AB2-84F7-E523621CF085}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LIT.Core", "LIT\LIT.Core\LIT.Core.csproj", "{DC7548D0-53C8-41BE-8C91-7A4E9969F53D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Instructions", "Solution Instructions", "{52DC591C-4527-4DE7-B709-E5554BD5D73C}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{DBFF92F2-0851-4340-91C1-FA0CD669C34E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{E30A5B1D-E58D-42BA-963F-C571145766A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LITModels", "LIT\LITModels\LITModels.csproj", "{2956FFB0-A823-43BC-99CA-D2855D842F9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLDataAccessLayer", "LIT\SQLDataAccessLayer\SQLDataAccessLayer.csproj", "{F07EB354-1F6A-4B89-B1B4-E7AF9A827368}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LIT.Common", "LIT\Modules\LIT.Common\LIT.Common.csproj", "{170293B1-6C7F-485C-A3B4-A85927180A6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LIT.Modules.TabControl", "LIT\Modules\LIT.Modules.TabControl\LIT.Modules.TabControl.csproj", "{E8DB46F8-B13C-41C0-8704-20FB331F813D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{196D7E0B-4A36-4AB2-84F7-E523621CF085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{196D7E0B-4A36-4AB2-84F7-E523621CF085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{196D7E0B-4A36-4AB2-84F7-E523621CF085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{196D7E0B-4A36-4AB2-84F7-E523621CF085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC7548D0-53C8-41BE-8C91-7A4E9969F53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7548D0-53C8-41BE-8C91-7A4E9969F53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7548D0-53C8-41BE-8C91-7A4E9969F53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7548D0-53C8-41BE-8C91-7A4E9969F53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2956FFB0-A823-43BC-99CA-D2855D842F9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2956FFB0-A823-43BC-99CA-D2855D842F9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2956FFB0-A823-43BC-99CA-D2855D842F9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2956FFB0-A823-43BC-99CA-D2855D842F9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F07EB354-1F6A-4B89-B1B4-E7AF9A827368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07EB354-1F6A-4B89-B1B4-E7AF9A827368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07EB354-1F6A-4B89-B1B4-E7AF9A827368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07EB354-1F6A-4B89-B1B4-E7AF9A827368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170293B1-6C7F-485C-A3B4-A85927180A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170293B1-6C7F-485C-A3B4-A85927180A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170293B1-6C7F-485C-A3B4-A85927180A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170293B1-6C7F-485C-A3B4-A85927180A6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8DB46F8-B13C-41C0-8704-20FB331F813D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8DB46F8-B13C-41C0-8704-20FB331F813D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8DB46F8-B13C-41C0-8704-20FB331F813D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8DB46F8-B13C-41C0-8704-20FB331F813D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2956FFB0-A823-43BC-99CA-D2855D842F9D} = {E30A5B1D-E58D-42BA-963F-C571145766A3}
+		{F07EB354-1F6A-4B89-B1B4-E7AF9A827368} = {DBFF92F2-0851-4340-91C1-FA0CD669C34E}
+		{170293B1-6C7F-485C-A3B4-A85927180A6D} = {E62A3808-81D7-4329-A6D4-9929B600C3EE}
+		{E8DB46F8-B13C-41C0-8704-20FB331F813D} = {E62A3808-81D7-4329-A6D4-9929B600C3EE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C788A249-17EA-408A-889D-1B061DB49BDE}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/tfs/ers%20projects
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = LIT\\LIT\\LIT.csproj
+		SccProjectName1 = LIT/LIT
+		SccLocalPath1 = LIT\\LIT
+		SccProjectUniqueName2 = LIT\\LIT.Core\\LIT.Core.csproj
+		SccProjectName2 = LIT/LIT.Core
+		SccLocalPath2 = LIT\\LIT.Core
+		SccProjectUniqueName3 = LIT\\LITModels\\LITModels.csproj
+		SccProjectTopLevelParentUniqueName3 = LIT.sln
+		SccProjectName3 = LIT/LITModels
+		SccLocalPath3 = LIT\\LITModels
+		SccProjectUniqueName4 = LIT\\SQLDataAccessLayer\\SQLDataAccessLayer.csproj
+		SccProjectTopLevelParentUniqueName4 = LIT.sln
+		SccProjectName4 = LIT/SQLDataAccessLayer
+		SccLocalPath4 = LIT\\SQLDataAccessLayer
+		SccProjectUniqueName5 = LIT\\Modules\\LIT.Modules.TabControl\\LIT.Modules.TabControl.csproj
+		SccProjectTopLevelParentUniqueName5 = LIT.sln
+		SccProjectName5 = LIT/Modules/LIT.Modules.TabControl
+		SccLocalPath5 = LIT\\Modules\\LIT.Modules.TabControl
+		SccProjectUniqueName6 = LIT\\Modules\\LIT.Common\\LIT.Common.csproj
+		SccProjectTopLevelParentUniqueName6 = LIT.sln
+		SccProjectName6 = LIT/Modules/LIT.Common
+		SccLocalPath6 = LIT\\Modules\\LIT.Common
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Media\Images\bell.png" />
+    <None Remove="Media\Images\box-green.png" />
+    <None Remove="Media\Images\check.png" />
+    <None Remove="Media\Images\checked.png" />
+    <None Remove="Media\Images\delete.png" />
+    <None Remove="Media\Images\delimages.png" />
+    <None Remove="Media\Images\deticon.png" />
+    <None Remove="Media\Images\edit.png" />
+    <None Remove="Media\Images\folder-search2.png" />
+    <None Remove="Media\Images\folder.png" />
+    <None Remove="Media\Images\house.png" />
+    <None Remove="Media\Images\icon_pdf.png" />
+    <None Remove="Media\Images\image_2023_06_30T13_35_12_642Z.png" />
+    <None Remove="Media\Images\linkout.png" />
+    <None Remove="Media\Images\LIV_interary_logo.png" />
+    <None Remove="Media\Images\LIV_logo.png" />
+    <None Remove="Media\Images\LIV_logo_3.png" />
+    <None Remove="Media\Images\login_bg.png" />
+    <None Remove="Media\Images\money-note.png" />
+    <None Remove="Media\Images\next-arrow.png" />
+    <None Remove="Media\Images\next_move.png" />
+    <None Remove="Media\Images\next_shift.png" />
+    <None Remove="Media\Images\null.png" />
+    <None Remove="Media\Images\paperClip.png" />
+    <None Remove="Media\Images\pdficons.png" />
+    <None Remove="Media\Images\pdf_icons.png" />
+    <None Remove="Media\Images\plus.png" />
+    <None Remove="Media\Images\prev-arrow.png" />
+    <None Remove="Media\Images\print.png" />
+    <None Remove="Media\Images\save.png" />
+    <None Remove="Media\Images\sell.png" />
+    <None Remove="Media\Images\sendEmail.png" />
+    <None Remove="Media\Images\tickimg.png" />
+    <None Remove="Media\Images\unchecked.png" />
+    <None Remove="Media\Images\uploadBtn.png" />
+    <None Remove="Media\Images\warning.png" />
+    <None Remove="Media\Images\words.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Common" Version="8.2.1" />
+    <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.2.1" />
+    <PackageReference Include="CommunityToolkit.HighPerformance" Version="8.2.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2045.28" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="Prism.Unity" Version="8.1.97" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SQLDataAccessLayer\SQLDataAccessLayer.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\Images\bell.png" />
+    <Resource Include="Media\Images\box-green.png" />
+    <Resource Include="Media\Images\check.png" />
+    <Resource Include="Media\Images\checked.png" />
+    <Resource Include="Media\Images\delete.png" />
+    <Resource Include="Media\Images\delimages.png" />
+    <Resource Include="Media\Images\deticon.png" />
+    <Resource Include="Media\Images\edit.png" />
+    <Resource Include="Media\Images\folder-search2.png" />
+    <Resource Include="Media\Images\folder.png" />
+    <Resource Include="Media\Images\house.png" />
+    <Resource Include="Media\Images\icon_pdf.png" />
+    <Resource Include="Media\Images\image_2023_06_30T13_35_12_642Z.png" />
+    <Resource Include="Media\Images\linkout.png" />
+    <Resource Include="Media\Images\LIV_interary_logo.png" />
+    <Resource Include="Media\Images\LIV_logo.png" />
+    <Resource Include="Media\Images\LIV_logo_3.png" />
+    <Resource Include="Media\Images\login_bg.png" />
+    <Resource Include="Media\Images\money-note.png" />
+    <Resource Include="Media\Images\next-arrow.png" />
+    <Resource Include="Media\Images\next_move.png" />
+    <Resource Include="Media\Images\next_shift.png" />
+    <Resource Include="Media\Images\null.png" />
+    <Resource Include="Media\Images\paperClip.png" />
+    <Resource Include="Media\Images\pdficons.png" />
+    <Resource Include="Media\Images\pdf_icons.png" />
+    <Resource Include="Media\Images\plus.png" />
+    <Resource Include="Media\Images\prev-arrow.png" />
+    <Resource Include="Media\Images\print.png" />
+    <Resource Include="Media\Images\save.png" />
+    <Resource Include="Media\Images\sell.png" />
+    <Resource Include="Media\Images\sendEmail.png" />
+    <Resource Include="Media\Images\tickimg.png" />
+    <Resource Include="Media\Images\unchecked.png" />
+    <Resource Include="Media\Images\uploadBtn.png" />
+    <Resource Include="Media\Images\warning.png" />
+    <Resource Include="Media\Images\words.png" />
+  </ItemGroup>
+</Project>

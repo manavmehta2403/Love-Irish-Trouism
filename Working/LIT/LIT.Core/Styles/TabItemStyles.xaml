@@ -1,0 +1,101 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/LIT.Core;component/Themes/Generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!-- Define the common dynamic resources -->
+    <SolidColorBrush x:Key="SelectedBackground" Color="#4d4d4d" />
+    <SolidColorBrush x:Key="SelectedForeground" Color="#ffffff" />
+    <SolidColorBrush x:Key="UnselectedBackground" Color="Transparent" />
+    <SolidColorBrush x:Key="UnselectedBorderBrush" Color="#fff5f5f5" />
+    <SolidColorBrush x:Key="UnselectedForeground" Color="#646567" />
+    
+    <!-- Base style for TabItem -->
+    <Style TargetType="TabItem" x:Key="TabItemBase"  >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="0,10,0,0"
+                        Margin="0,0">
+                        <ContentPresenter x:Name="ContentSite"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      ContentSource="Header"
+                                      Margin="5,0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource SelectedBackground}" />
+                            <Setter Property="Foreground" Value="{DynamicResource SelectedForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnselectedBackground}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource UnselectedBorderBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource UnselectedForeground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Base style for TabItem -->
+    <Style TargetType="TabItem" x:Key="TabItemBaseWhite"  >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border"
+                        BorderThickness="1,1,1,0"
+                        BorderBrush="#c9c9c9"
+                        CornerRadius="0,10,0,0"
+                        Margin="0,0"
+                            Padding="5">
+                        <ContentPresenter x:Name="ContentSite"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      ContentSource="Header"
+                                      Margin="5,0"
+                                         />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#f9f9f9" />
+                            <Setter Property="Foreground" Value="#25304c" />
+                            <Setter Property="FontWeight" Value="Medium" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnselectedBackground}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="transparent" />
+                            <Setter Property="Foreground" Value="{DynamicResource UnselectedForeground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- TabItem with the 'Blue' background -->
+    <Style TargetType="TabItem" BasedOn="{StaticResource TabItemBase}" x:Key="TabItemBlue">
+        <Setter Property="Background" Value="#4d4d4d" />
+    </Style>
+
+    <!-- TabItem with the 'White' background -->
+    <Style TargetType="TabItem" BasedOn="{StaticResource TabItemBase}" x:Key="TabItemWhite">
+        <Setter Property="Background" Value="White" />
+    </Style>
+
+    <!-- TabItem with the 'Light Grey' background -->
+    <Style TargetType="TabItem" BasedOn="{StaticResource TabItemBase}" x:Key="TabItemLightGrey">
+        <Setter Property="Background" Value="#f9f9f9" />
+    </Style>
+
+    <!-- TabItem with the 'Grey' background -->
+    <Style TargetType="TabItem" BasedOn="{StaticResource TabItemBase}" x:Key="TabItemGrey">
+        <Setter Property="Background" Value="#EBEBEB" />
+    </Style>
+
+</ResourceDictionary>

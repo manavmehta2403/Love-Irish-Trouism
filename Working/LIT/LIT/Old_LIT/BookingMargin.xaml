@@ -1,0 +1,42 @@
+﻿<Window x:Class="LIT.Old_LIT.BookingMargin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LIT.Old_LIT"
+        mc:Ignorable="d"
+        Title="Booking Margin" Height="200" Width="350">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/PasswordBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TabItemStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <!--<ColumnDefinition Width="297.83" />-->
+            <ColumnDefinition MaxWidth="145"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel  Grid.Column="0" Grid.Row="0" Margin="10,21,-150,3">
+            <TextBlock DockPanel.Dock="Left" Text="Override All" FontFamily="Calibri" Width="auto"  Height="24" FontSize="14" Padding="5,0,5,0" ></TextBlock>
+            <TextBox  DockPanel.Dock="Right" x:Name="txtOverrideAllmargin" Template="{StaticResource TextBoxBaseControlTemplate}" FontFamily="Calibri" Width="auto"  Height="24" FontSize="14" VerticalContentAlignment="Center" Padding="5,0,5,0" BorderBrush="#FFA1A1A1"  ></TextBox>
+        </DockPanel>
+        <DockPanel  Grid.Column="0" Grid.Row="1" Margin="10,21,-175,40">
+            <Button Name="btnMarginOk" FontFamily="Calibri" Template="{StaticResource ButtonBaseTemplate}" Content="Ok" Background="#579F00"  Foreground="#ffffff" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center"  Cursor="Hand" VerticalContentAlignment="Center" Padding="12,1,12,1"  FontSize="14" Click="btnMarginOk_Click">
+                
+            </Button>
+            <Button Name="btnMarginCancel" FontFamily="Calibri" Template="{StaticResource ButtonBaseTemplate}" Content="Cancel" Background="#579F00"  Foreground="#ffffff" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center"  Cursor="Hand" VerticalContentAlignment="Center" Padding="12,1,12,1"  FontSize="14" Click="btnMarginCancel_Click">
+                
+            </Button>
+           </DockPanel>
+
+    </Grid>
+</Window>

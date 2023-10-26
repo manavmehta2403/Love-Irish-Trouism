@@ -1,0 +1,598 @@
+﻿<Window x:Class="LIT.Old_LIT.SuppPricingOptionTemplate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:behavior="clr-namespace:LIT.Core.Behaviors;assembly=LIT.Core"
+        xmlns:local="clr-namespace:LIT"
+        mc:Ignorable="d"
+        Title="Supplier Pricing Option" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ScrollBarStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TextBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="SystemCommands.CloseWindowCommand" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_CloseWindowExecuted" />
+    </Window.CommandBindings>
+    <StackPanel>
+        <StackPanel HorizontalAlignment="Right">
+            <Button Command="SystemCommands.CloseWindowCommand" FontFamily="Calibri" Template="{StaticResource ButtonBaseTemplate}" Background="Transparent"  Foreground="#FF003D" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="&#10006;"  Cursor="Hand" Padding="12,1,12,1" MouseEnter="msEnter" MouseLeave="msLeave" FontSize="14" >
+
+            </Button>
+        </StackPanel>
+        <Grid  Width="800" VerticalAlignment="Top" Height="440" Background="#f5f5f5" ShowGridLines="True" >
+            <Grid Height="50" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="349" />
+                    <ColumnDefinition Width="138"/>
+                    <ColumnDefinition Width="125"/>
+                    <ColumnDefinition Width="190"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" FontSize="16" Foreground="#2e3954" Padding="10" FontWeight="SemiBold" Content="Choose Editing Option" VerticalAlignment="Center" Height="41"  />
+                <RadioButton Grid.Column="1" FontFamily="Calibri" FontSize="14"  Foreground="#FF53555E"  Margin="0,19,15,4" FontWeight="SemiBold" Content="Net and Markup"  Name="RbNetMark" Click="RbNetMark_Click" />
+                <RadioButton Grid.Column="2" FontFamily="Calibri" FontSize="14"  Foreground="#FF53555E"  Margin="0,19,22,4" FontWeight="SemiBold" Content="Net and Gross" Name="RbNetGross" Click="RbNetGross_Click"/>
+                <RadioButton Grid.Column="3" FontFamily="Calibri" FontSize="14"  Foreground="#FF53555E"  Margin="0,19,-33,4" FontWeight="SemiBold" Content="Gross and Commission" Name="RbGrossCommission" Click="RbGrossCommission_Click" />
+            </Grid>
+            <Grid Height="50" Margin="19,70,39,0"  Background="#fff" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="600" />
+                    <ColumnDefinition Width="200"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" FontSize="16" Foreground="#2e3954" Padding="20 0" FontWeight="SemiBold" Content="Edit Price" VerticalAlignment="Center" Margin="-9,0,0,0"  />
+                <Button Grid.Column="1" x:Name="BtnAddPrice" Content="&#43; Add" Style="{StaticResource btnBlue}" HorizontalAlignment="Left" Margin="82,14,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,0" FontSize="14"  Foreground="#FF579F00" FontWeight="Bold"  Cursor="Hand" Click="BtnAddPrice_Click" Background="White"/>
+
+            </Grid>
+            <Image HorizontalAlignment="Left" Height="14" Margin="694,88,0,0" VerticalAlignment="Top" Width="14" Source="/Union.png"/>
+            <Grid Margin="0 120 0 0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="800" />
+
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="dgPricingRateEdit" Height="150"  Background="#fff" Margin="20,0,40,-50" BorderBrush="#e1e1e1" CanUserAddRows="False" AutoGenerateColumns="False" HorizontalGridLinesBrush="#C9C9C9" VerticalGridLinesBrush="#C9C9C9"                        
+                          PreviewTextInput="dgPricingRateEdit_PreviewTextInput"
+                          SelectedCellsChanged="dgPricingRateEdit_SelectedCellsChanged"
+                           RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Extended" behavior:OldSingleClickDataGridBehavior.EnableSingleClickEditing="True"
+                          >
+                    
+                    <DataGrid.Columns  >
+                        <!--<DataGridTextColumn Width="80" FontFamily="Calibri" FontSize="14" Binding="{Binding NetPrice, UpdateSourceTrigger=PropertyChanged, ConverterCulture='en-IE' ,StringFormat=c}" Foreground="#FF53555E" Header="Net Price">-->
+                        <!--<DataGridTextColumn Width="80" FontFamily="Calibri" FontSize="14" 
+                        Binding="{Binding NetPrice, UpdateSourceTrigger=LostFocus,StringFormat=N2}" Foreground="#FF53555E" Header="Net Price" >
+
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="{Binding NetPrice}" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="Padding" Value="0,0,5,0" />
+                                    <Setter Property="Text" Value="{Binding NetPrice, StringFormat=N2}" />
+                                    <Style.Triggers>
+                                        --><!--<Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                        <Setter Property="Text" Value="{Binding NetPrice, UpdateSourceTrigger=PropertyChanged}" />
+                                    </Trigger>--><!--
+                                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                            <Setter Property="Text" Value="{Binding NetPrice, UpdateSourceTrigger=LostFocus}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>-->
+                        <DataGridTemplateColumn Width="80" x:Name="TxtNetprice" Header="Net Price" >
+                            <DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridTemplateColumn.HeaderStyle>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding CurrencyDisplayFormat }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" />
+                                        <TextBlock Grid.Column="1" Text="{Binding NetPrice,StringFormat=N2,UpdateSourceTrigger=LostFocus}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" >
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid FocusManager.FocusedElement="{Binding ElementName= txtnetprice}" >
+                                            <TextBlock Grid.Column="0"  Text="{Binding CurrencyDisplayFormat }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" />
+                                            <TextBox Grid.Column="1" x:Name="txtnetprice" Text="{Binding NetPrice,StringFormat=N2,UpdateSourceTrigger=LostFocus,Mode=TwoWay}"  FontFamily="Calibri" FontSize="14" HorizontalAlignment="Stretch" TextAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" TextChanged="Txtnetprice_TextChanged">
+                                            </TextBox>
+
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTextColumn Width="80" FontFamily="Calibri" FontSize="14" Binding="{Binding MarkupPercentage,UpdateSourceTrigger=LostFocus, StringFormat=N2}" Foreground="#FF53555E" Header="Markup Percentage">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="Padding" Value="0,0,5,0" />
+                                    <Setter Property="Text" Value="{Binding MarkupPercentage, StringFormat=N2}" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>-->
+
+                        <DataGridTemplateColumn Width="80" Header="Markup Percentage" >
+                            <DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                </Style>
+                            </DataGridTemplateColumn.HeaderStyle>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding MarkupPercentage,StringFormat=N2,UpdateSourceTrigger=LostFocus}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                        <TextBlock Grid.Column="1"  Text="%" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,1,0" Margin="0,0,1,0"   >
+                                        </TextBlock>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid FocusManager.FocusedElement="{Binding ElementName= txtmarkuppercen}">
+                                            <TextBox Grid.Column="0" x:Name="txtmarkuppercen"  Text="{Binding MarkupPercentage,StringFormat=N2,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Stretch" TextAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" TextChanged="Txtnetprice_TextChanged" >
+                                            </TextBox>
+
+
+                                            <TextBlock Grid.Column="1"  Text="%" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" TextAlignment="Right" Padding="0,0,3,0" Margin="0,0,3,0"  Panel.ZIndex="-1"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--<DataGridTextColumn Width="80" FontFamily="Calibri" FontSize="14" Binding="{Binding GrossPrice,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=N2}" IsReadOnly="True" Foreground="#FF53555E" Header="Gross Price">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="Padding" Value="0,0,5,0" />
+                                    <Setter Property="Text" Value="{Binding GrossPrice, StringFormat=N2}" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>-->
+
+                        <DataGridTemplateColumn Width="80" Header="Gross Price" IsReadOnly="True" >
+                            <DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                </Style>
+                            </DataGridTemplateColumn.HeaderStyle>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding CurrencyDisplayFormat }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                        <TextBlock Grid.Column="1" Text="{Binding GrossPrice, StringFormat=N2,UpdateSourceTrigger=LostFocus}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding CurrencyDisplayFormat }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                        <TextBox Grid.Column="1"  Text="{Binding GrossPrice,StringFormat=N2,UpdateSourceTrigger=LostFocus,Mode=TwoWay}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Stretch" TextAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Width="80" FontFamily="Calibri" FontSize="14" Binding="{Binding CommissionPercentage}"  Foreground="#FF53555E" Header="Commission" Visibility="Hidden">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridCheckBoxColumn Width="50" Header="Mon" x:Name="ChbMon" Binding="{Binding Monday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style>
+                                    <EventSetter Event="CheckBox.Checked" Handler="MonOnChecked"/>
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                            <DataGridCheckBoxColumn.ElementStyle >
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Monday}"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
+                            <DataGridCheckBoxColumn.EditingElementStyle>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Monday, Mode=OneWay}"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.EditingElementStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Width="50" Header="Tue" x:Name="ChbTue" Binding="{Binding Tuesday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style>
+                                    <EventSetter Event="CheckBox.Checked" Handler="TueOnChecked"/>
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                            <DataGridCheckBoxColumn.ElementStyle >
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Tuesday}"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
+                            <DataGridCheckBoxColumn.EditingElementStyle>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Tuesday, Mode=OneWay}"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.EditingElementStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Width="50" Header="Wed" x:Name="ChbWed" Binding="{Binding Wednesday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style>
+                                    <EventSetter Event="CheckBox.Checked" Handler="WedOnChecked"/>
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                            <DataGridCheckBoxColumn.ElementStyle >
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Wednesday}"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
+                            <DataGridCheckBoxColumn.EditingElementStyle>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Wednesday, Mode=OneWay}"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.EditingElementStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Width="50" Header="Thu" x:Name="ChbThu" Binding="{Binding Thursday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style>
+                                    <EventSetter Event="CheckBox.Checked" Handler="ThuOnChecked"/>
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                            <DataGridCheckBoxColumn.ElementStyle >
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Thursday}"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
+                            <DataGridCheckBoxColumn.EditingElementStyle>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Thursday, Mode=OneWay}"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.EditingElementStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Width="50" Header="Fri" x:Name="ChbFri" Binding="{Binding Friday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style>
+                                    <EventSetter Event="CheckBox.Checked" Handler="FriOnChecked"/>
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                            <DataGridCheckBoxColumn.ElementStyle >
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Friday}"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
+                            <DataGridCheckBoxColumn.EditingElementStyle>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Friday, Mode=OneWay}"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.EditingElementStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Width="50" Header="Sat" x:Name="ChbSat" Binding="{Binding Saturday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style>
+                                    <EventSetter Event="CheckBox.Checked" Handler="SatOnChecked"/>
+
+                                </Style>
+
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                            <DataGridCheckBoxColumn.ElementStyle >
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Saturday}"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
+                            <DataGridCheckBoxColumn.EditingElementStyle>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Saturday, Mode=OneWay}"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.EditingElementStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridCheckBoxColumn Width="50" Header="Sun" x:Name="ChbSun" Binding="{Binding Sunday, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style>
+                                    <EventSetter Event="CheckBox.Checked" Handler="SunOnChecked"/>
+
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                            <DataGridCheckBoxColumn.ElementStyle >
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Sunday}"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
+                            <DataGridCheckBoxColumn.EditingElementStyle>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsChecked" Value="{Binding Sunday, Mode=OneWay}"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridCheckBoxColumn.EditingElementStyle>
+                        </DataGridCheckBoxColumn>
+                        <DataGridTextColumn Width="60" FontFamily="Calibri" FontSize="14" Binding="{Binding PricingOptionId}"  Foreground="#FF53555E" Header="PricingOptionId" Visibility="Hidden"/>
+                        <DataGridTextColumn Width="50" FontFamily="Calibri" FontSize="14" Binding="{Binding PriceEditRateId}" Foreground="#FF53555E" Header="PriceEditRateId" Visibility="Hidden"/>
+                        <DataGridTextColumn Width="50" FontFamily="Calibri" FontSize="14" Binding="{Binding SupplierServiceId}" Foreground="#FF53555E" Header="SupplierServiceId" Visibility="Hidden"/>
+                        <DataGridTemplateColumn Width="70"  Header="Delete"  >
+                            <DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Foreground" Value="#252E39" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontFamily" Value="Calibri" />
+                                </Style>
+                            </DataGridTemplateColumn.HeaderStyle>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnPriceEditRateDelete" FontFamily="Calibri" Template="{StaticResource ButtonBaseTemplate}" Background="Transparent"  Foreground="#FF003D" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="&#10006;" Click="btnPriceEditRateDelete_Click" Cursor="Hand" Padding="12,1,12,1" MouseEnter="msEnter" MouseLeave="msLeave" FontSize="14" >
+                                        <!--<Image Source="../Images/delete_black.png" Width="16" Height="16" />-->
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid  Height="50"  Margin="0,321,0,70">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="55" />
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" FontSize="16" Foreground="#2e3954" Padding="40,5,0,10" FontWeight="SemiBold" Content="Rounding" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="186"  />
+                <CheckBox x:Name = "Chbru1" Grid.Row="0" Grid.Column="1" Content = "1" FontFamily="Calibri" FontSize="14"  Foreground="#FF53555E"  Margin = "10" Click="Chbru1_Click"  />
+                <CheckBox x:Name = "Chbru2" Grid.Row="0" Grid.Column="2" Content = "5" FontFamily="Calibri" FontSize="14"  Foreground="#FF53555E" Margin = "10"  Click="Chbru2_Click"/>
+                <CheckBox x:Name = "Chbru3" Grid.Row="0" Grid.Column="3" Content = "10" FontFamily="Calibri" FontSize="14" Foreground="#FF53555E" Margin = "10" Click="Chbru3_Click" />
+            </Grid>
+
+
+
+        </Grid>
+    </StackPanel>
+</Window>

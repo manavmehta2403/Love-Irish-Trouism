@@ -1,0 +1,1370 @@
+﻿<Window x:Class="LIT.Old_LIT.SupplierServiceUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:behavior="clr-namespace:LIT.Core.Behaviors;assembly=LIT.Core"
+             xmlns:local="clr-namespace:LIT"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" d:DesignWidth="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/PasswordBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TabItemStyles.xaml"/>
+
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ScrollBarStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Grid.ColumnSpan="2">
+            <Label x:Name="lblserviceNameUC" Visibility="Hidden" HorizontalAlignment="Right" FontWeight="Medium" FontSize="13" Margin="0 0 10 2"></Label>
+            <Label x:Name="lblRatesDateUC" Visibility="Hidden" HorizontalAlignment="Right" FontWeight="Medium" FontSize="13" Margin="0 -10 10 0"></Label>
+        </StackPanel>
+        <TabControl Width="auto" Grid.Row="0" Height="auto" MinWidth="{Binding ElementName=Navigationframe, Path=ActualWidth}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="white" BorderBrush="#FF4D4D4D" BorderThickness="1,1,1,1" >
+
+
+            <TabItem Header="Services" Name="SupplierServices" Style="{StaticResource TabItemWhite}" Width="131" FontSize="16" Height="48" Cursor="Hand" Margin="-4,0,0,0" >
+
+
+                <DockPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Column="0" Grid.Row="0"  x:Name="StackServicesUC" DockPanel.Dock="Left"  Background="#f9f9f9" VerticalAlignment="Stretch" >
+                            <StackPanel VerticalAlignment="Center" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Label  FontSize="14" Content="Services" 
+                                        FontWeight="Medium" Foreground="#25304C" Height="30" Width="auto"  Grid.Column="0" Grid.Row="0"/>
+
+                                    <Button  Style="{StaticResource btnBlue}" x:Name="BtnServiceAddUc" Click="BtnServiceAddUc_Click" 
+                                          Background="Transparent" VerticalAlignment="Center"  
+                                         VerticalContentAlignment="Center" FontFamily="Calibri" Height="30" FontSize="16"
+                                         BorderBrush="#FF579F00" Foreground="#FF579F00" FontWeight="Bold" MaxWidth="140"
+                                         Width="58" Cursor="Hand" HorizontalAlignment="Right"  Grid.Column="1" Grid.Row="0" >
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="/LIT.Core;component/Media/Images/plus.png" Width="13" VerticalAlignment="Center"></Image>
+                                            <Label Foreground="#FF579F00" FontSize="16" VerticalAlignment="Center">Add</Label>
+                                        </StackPanel>
+
+                                    </Button>
+                                </Grid>
+                               
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0 " >
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible">
+
+                                    <DataGrid behavior:NewSingleClickDataGridBehavior.EnableSingleClickEditing="True" x:Name="dgSupplierServicesuc" ColumnWidth="*"  MinHeight="315" MaxHeight="450" VerticalAlignment="Stretch" BorderThickness="1,1,1,0" BorderBrush="#f9f9f9"  AutoGenerateColumns="False" CanUserAddRows="False" HorizontalGridLinesBrush="#C9C9C9" HorizontalAlignment="Left" VerticalGridLinesBrush="#C9C9C9" Background="#f9f9f9" VerticalScrollBarVisibility="Auto">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <EventSetter Event="MouseDoubleClick" Handler="dgSupplierServicesucDataGridCell_MouseDoubleClick"/>
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+
+                                        <DataGridTextColumn Header="ServiceID" Binding="{Binding ServiceID}"  Visibility="Hidden" Width="0">
+                                            <DataGridTextColumn.HeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                </Style>
+                                            </DataGridTextColumn.HeaderStyle>
+
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="SupplierID" Binding="{Binding SupplierID}" Visibility="Hidden" Width="0">
+                                            <DataGridTextColumn.CellStyle>
+                                                <Style>
+                                                    <!--<Setter Property="ToolTip" Value="{Binding SupplierID}">
+                                                    
+                                                </Setter>-->
+                                                </Style>
+                                            </DataGridTextColumn.CellStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridCheckBoxColumn Header="Active" x:Name="chbsupplieractiveuc" Binding="{Binding IsActive, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden" MinWidth="50">
+                                            <DataGridCheckBoxColumn.HeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                </Style>
+                                            </DataGridCheckBoxColumn.HeaderStyle>
+                                            <DataGridCheckBoxColumn.ElementStyle >
+                                                <Style TargetType="CheckBox">
+                                                    <Setter Property="IsChecked" Value="{Binding IsActive}"></Setter>
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                        <Setter Property="FontSize" Value="14" />
+                                                        <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        <!--<Setter Property="behavior:SingleClickCheckBoxBehavior.IsEnabled" Value="True"></Setter>-->
+                                                    </Style>
+                                            </DataGridCheckBoxColumn.ElementStyle>
+                                            <DataGridCheckBoxColumn.EditingElementStyle>
+                                                <Style TargetType="CheckBox">
+                                                    <Setter Property="IsChecked" Value="{Binding IsActive, Mode=OneWay}"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                    <Setter Property="IsEnabled" Value="False"></Setter>
+                                                </Style>
+                                            </DataGridCheckBoxColumn.EditingElementStyle>
+
+                                        </DataGridCheckBoxColumn>
+                                        <DataGridTemplateColumn Header="Service Name" MinWidth="212" Width="*">
+                                            <DataGridTemplateColumn.HeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                                </Style>
+                                            </DataGridTemplateColumn.HeaderStyle>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Grid.Column="0" Text="{Binding ServiceName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Calibri" FontSize="14" Padding="5 0 0 0">
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                            <DataGridTemplateColumn.CellEditingTemplate>
+                                                <DataTemplate>
+                                                    <Grid FocusManager.FocusedElement="{Binding ElementName= txtServicename}">
+                                                        <TextBox Grid.Column="0" x:Name="txtServicename" Text="{Binding ServiceName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Calibri" FontSize="14" Padding="5 0 0 0">
+                                                        </TextBox>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellEditingTemplate>
+                                        </DataGridTemplateColumn>
+
+
+                                        <DataGridComboBoxColumn Header="Type" x:Name="CmbSupplierServiceTypeUC"  DisplayMemberPath="."
+                                             SelectedItemBinding="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" MinWidth="180" Width="*"  >
+                                            <DataGridComboBoxColumn.HeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.HeaderStyle>
+                                            <DataGridComboBoxColumn.ElementStyle >
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="ItemsSource" Value="{Binding Path=ListofSupplierServiceType, Mode=OneWay}" />
+                                                    <Setter Property="IsSynchronizedWithCurrentItem" Value="False"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
+                                            <DataGridComboBoxColumn.EditingElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="ItemsSource" Value="{Binding Path=ListofSupplierServiceType, Mode=OneWay}"/>
+                                                    <Setter Property="IsDropDownOpen" Value="True" />
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.EditingElementStyle>
+
+                                        </DataGridComboBoxColumn>
+
+
+                                        <DataGridComboBoxColumn Header="Currency" x:Name="CmbCurrencyDetailsUC"  DisplayMemberPath="."
+                                             SelectedItemBinding="{Binding SelectedItemCurrency, UpdateSourceTrigger=PropertyChanged}" MinWidth="160" Width="*">
+                                            <DataGridComboBoxColumn.HeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.HeaderStyle>
+                                            <DataGridComboBoxColumn.ElementStyle >
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="ItemsSource" Value="{Binding Path=ListofCurrency, Mode=OneWay}" />
+                                                    <Setter Property="IsSynchronizedWithCurrentItem" Value="False"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
+                                            <DataGridComboBoxColumn.EditingElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="ItemsSource" Value="{Binding Path=ListofCurrency, Mode=OneWay}"/>
+                                                    <Setter Property="IsDropDownOpen" Value="True" />
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.EditingElementStyle>
+
+                                        </DataGridComboBoxColumn>
+
+
+
+                                        <DataGridComboBoxColumn Header="Charges" x:Name="CmbChargesgroupinfoUC"  DisplayMemberPath="."
+                                             SelectedItemBinding="{Binding SelectedItemGroupInfo, UpdateSourceTrigger=PropertyChanged}" MinWidth="100" Width="*">
+                                            <DataGridComboBoxColumn.HeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.HeaderStyle>
+                                            <DataGridComboBoxColumn.ElementStyle >
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="ItemsSource" Value="{Binding Path=ListofGroupinfo, Mode=OneWay}" />
+                                                    <Setter Property="IsSynchronizedWithCurrentItem" Value="False"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
+                                            <DataGridComboBoxColumn.EditingElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="ItemsSource" Value="{Binding Path=ListofGroupinfo, Mode=OneWay}"/>
+                                                    <Setter Property="IsDropDownOpen" Value="True" />
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                </Style>
+                                            </DataGridComboBoxColumn.EditingElementStyle>
+
+                                        </DataGridComboBoxColumn>
+
+
+                                        <DataGridTemplateColumn MinWidth="110"  Width="*" Header="Rates" >
+                                            <DataGridTemplateColumn.HeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                    <Setter Property="FontSize" Value="14" />
+                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                </Style>
+                                            </DataGridTemplateColumn.HeaderStyle>
+                                            <DataGridTemplateColumn.CellTemplate>
+
+                                                <DataTemplate>
+                                                    <Button Name="btnServiceRates" FontFamily="Calibri" Template="{StaticResource ButtonBaseTemplate}" Content="Rates" Background="#579F00"  Foreground="#ffffff" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnServiceRates_Click" Cursor="Hand" VerticalContentAlignment="Center" Padding="12,1,12,1" MouseEnter="msEnter" MouseLeave="msLeave" FontSize="14" >
+                                                        <!--<Image Source="../Images/edit_black.png" Width="16" Height="16" />-->
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </StackPanel>
+                        <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"
+
+              HorizontalAlignment="Stretch"
+
+              VerticalAlignment="Stretch"
+
+              Background="#b9b9b9"
+
+              ShowsPreview="True"
+
+              Width="5" Margin="4" />
+                        <DockPanel Grid.Column="2" DockPanel.Dock="Right">
+                            <StackPanel DockPanel.Dock="Top">
+
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Panel.ZIndex="9" VerticalAlignment="Center" >
+
+                                    <CheckBox  FlowDirection="RightToLeft" x:Name="chbhidenonactive" IsThreeState="False" VerticalContentAlignment="Center" FontFamily="Calibri" Content="Hide Non Active Items" IsChecked="True" Click="chbhidenonactive_Click" FontSize="14" FontWeight="Bold" Foreground="#25304c" Margin="0,5,10,5" VerticalAlignment="Center">
+                                        <CheckBox.Resources>
+                                            <Style TargetType="{x:Type Path}">
+                                                <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                            </Style>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+                                    <CheckBox FlowDirection="RightToLeft" x:Name="chbhideexpiredseasons"  IsThreeState="False" VerticalContentAlignment="Center"  FontFamily="Calibri" Content="Hide Expired Seasons" Click="chbhideexpiredseasons_Click" Margin="0,5,10,5" FontSize="14" Foreground="#25304c" FontWeight="Bold" VerticalAlignment="Center">
+                                        <CheckBox.Resources>
+                                            <Style TargetType="{x:Type Path}">
+                                                <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                            </Style>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                </StackPanel>
+
+                                <StackPanel  VerticalAlignment="Top" Height="auto" Margin="0,0,0,10"  Background="#f9f9f9">
+
+
+
+                                    <TabControl Padding="5" Background="#EBEBEB" Margin="2">
+
+                                        <TabItem Header="Rates" FontFamily="Calibri" Name="SupplierRatesCore" Style="{StaticResource TabItemGrey}" Width="131" FontSize="16" Height="48" Cursor="Hand" Margin="-4,0,0,0">
+
+
+
+                                            <Grid x:Name="StackRates" Width="auto" Background="White">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition MinWidth="500" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="28" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,4,0,0">
+                                                    <Label Content="Season Dates For Selected Services" FontFamily="Calibri" HorizontalAlignment="Left" FontSize="14"  VerticalAlignment="Center" FontWeight="Medium" Foreground="#25304C" Margin="10,0,0,0"></Label>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,4,0,0">
+
+                                                    <Button Content="&#43; Add" Style="{StaticResource btnBlue}" Name="BtnRatesAdd" Click="BtnRatesAdd_Click" VerticalAlignment="Center" Margin="0,0,10,3" VerticalContentAlignment="Center" FontFamily="Calibri" Height="25" FontSize="16" BorderBrush="#FF579F00" Foreground="#FF579F00" FontWeight="Bold" MaxWidth="140" Width="50" Cursor="Hand" HorizontalAlignment="Right" >
+                                                        <Button.Background>
+                                                            <SolidColorBrush Color="#FF579F00" Opacity="0"/>
+                                                        </Button.Background>
+
+                                                    </Button>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="1,15">
+
+                                                    <DataGrid behavior:NewSingleClickDataGridBehavior.EnableSingleClickEditing="True" x:Name="dgSupplierServicesRatesUC" ColumnWidth="*" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" BorderThickness="1,1,1,1" BorderBrush="#c9c9c9" HorizontalGridLinesBrush="#C9C9C9" VerticalGridLinesBrush="#C9C9C9" Background="White"
+                                                             SelectedCellsChanged="dgSupplierServicesRatesUC_SelectedCellsChanged" 
+                                                              RowDetailsVisibilityMode="VisibleWhenSelected"  MaxHeight="200">
+                                                        <DataGrid.Resources>
+                                                            <Style TargetType="{x:Type DataGridCell}">
+                                                                <EventSetter Event="MouseDoubleClick" Handler="dgSupplierServicesRatesUCDataGridCell_MouseDoubleClick"/>
+                                                            </Style>
+                                                        </DataGrid.Resources>
+                                                        <DataGrid.Columns>
+                                                            <DataGridTextColumn Header="ServiceID" Binding="{Binding ServiceID}"  Visibility="Hidden">
+
+                                                            </DataGridTextColumn>
+                                                            <DataGridTextColumn Header="SupplierServiceDetailsRateId" Binding="{Binding SupplierServiceDetailsRateId}" Visibility="Hidden">
+
+                                                            </DataGridTextColumn>
+
+                                                            <DataGridTemplateColumn Header="Valid From" MaxWidth="105">
+                                                                <DataGridTemplateColumn.HeaderStyle>
+                                                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                        <Setter Property="Foreground" Value="#252E39" />
+                                                                        <Setter Property="FontSize" Value="14" />
+                                                                        <Setter Property="FontWeight" Value="Medium" />
+                                                                        <Setter Property="FontFamily" Value="Calibri"/>
+                                                                    </Style>
+                                                                </DataGridTemplateColumn.HeaderStyle>
+                                                                <DataGridTemplateColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <DatePicker  x:Name="Txtvalidfrom"  MaxWidth="150" SelectedDate="{Binding ValidFrom, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" FontSize="14"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" BorderThickness="0,0,0,0" Loaded="Txtvalidfrom_Loaded" >
+                                                                            <DatePicker.Background>
+                                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                    <GradientStop Color="Transparent"/>
+                                                                                    <GradientStop Color="Transparent" Offset="1"/>
+                                                                                </LinearGradientBrush>
+                                                                            </DatePicker.Background>
+                                                                            <DatePicker.Resources>
+                                                                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                                                                    <Setter Property="Text" Value="Select date" />
+                                                                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                                                    <Setter Property="Focusable" Value="False"/>
+                                                                                    <!--<Setter Property="IsReadOnly" Value="True"/>-->
+                                                                                    <!--<Setter Property="Background">
+                                                                                        <Setter.Value>
+                                                                                            <ImageBrush ImageSource="/LIT.Core;component/Media/Images/folder.png" Opacity="0"/>
+                                                                                        </Setter.Value>
+                                                                                    </Setter>-->
+                                                                                </Style>
+                                                                            </DatePicker.Resources>
+                                                                        </DatePicker>
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellTemplate>
+                                                                <DataGridTemplateColumn.CellEditingTemplate>
+                                                                    <DataTemplate>
+                                                                        <Grid FocusManager.FocusedElement="{Binding ElementName= Txtvalidfrom}" >
+                                                                            <DatePicker  x:Name="Txtvalidfrom"  MaxWidth="150" SelectedDate="{Binding ValidFrom, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri"  FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" BorderThickness="0,0,0,0"  >
+                                                                                <DatePicker.Background>
+                                                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                        <GradientStop Color="White"/>
+                                                                                        <GradientStop Color="White" Offset="1"/>
+                                                                                    </LinearGradientBrush>
+                                                                                </DatePicker.Background>
+                                                                                <DatePicker.Resources>
+                                                                                    <Style TargetType="{x:Type DatePickerTextBox}">
+                                                                                        <Setter Property="Text" Value="Select date" />
+                                                                                        <Setter Property="Focusable" Value="False"/>
+                                                                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                                                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                                                                        <!--<Setter Property="IsReadOnly" Value="True"/>-->
+                                                                                        <!--<Setter Property="Background">
+                                                                                            <Setter.Value>
+                                                                                                <ImageBrush ImageSource="/LIT.Core;component/Media/Images/folder.png" Opacity="0"/>
+                                                                                            </Setter.Value>
+                                                                                        </Setter>-->
+
+                                                                                    </Style>
+                                                                                </DatePicker.Resources>
+                                                                            </DatePicker>
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellEditingTemplate>
+                                                            </DataGridTemplateColumn>
+
+                                                            <DataGridTemplateColumn Header="Valid To"  MaxWidth="105">
+                                                                <DataGridTemplateColumn.HeaderStyle>
+                                                                    <Style TargetType="DataGridColumnHeader">
+                                                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                        <!--<Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                                                <Setter Property="VerticalAlignment" Value="Stretch" />-->
+                                                                        <Setter Property="Foreground" Value="#252E39" />
+                                                                        <Setter Property="FontSize" Value="14" />
+                                                                        <Setter Property="FontWeight" Value="Medium" />
+                                                                        <Setter Property="FontFamily" Value="Calibri"/>
+                                                                    </Style>
+                                                                </DataGridTemplateColumn.HeaderStyle>
+                                                                <DataGridTemplateColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <DatePicker  x:Name="Txtvalidto"  SelectedDate="{Binding ValidTo, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" FontSize="14"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" BorderThickness="0,0,0,0">
+                                                                            <DatePicker.Background>
+                                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                    <GradientStop Color="Transparent"/>
+                                                                                    <GradientStop Color="Transparent" Offset="1"/>
+                                                                                </LinearGradientBrush>
+                                                                            </DatePicker.Background>
+                                                                            <DatePicker.Resources>
+                                                                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                                                                    <Setter Property="Text" Value="Select date" />
+                                                                                    <Setter Property="Focusable" Value="False"/>
+                                                                                    <!--<Setter Property="IsReadOnly" Value="True"/>-->
+                                                                                    <!--<Setter Property="Background">
+                                                                                        <Setter.Value>
+                                                                                            <ImageBrush ImageSource="/LIT.Core;component/Media/Images/folder.png" Opacity="0"/>
+                                                                                        </Setter.Value>
+                                                                                    </Setter>-->
+                                                                                </Style>
+                                                                            </DatePicker.Resources>
+                                                                        </DatePicker>
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellTemplate>
+                                                                <DataGridTemplateColumn.CellEditingTemplate>
+                                                                    <DataTemplate>
+                                                                        <Grid FocusManager.FocusedElement="{Binding ElementName= Txtvalidto}" >
+                                                                            <DatePicker  x:Name="Txtvalidto" SelectedDate="{Binding ValidTo, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri"  FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" BorderThickness="0,0,0,0">
+                                                                                <DatePicker.Background>
+                                                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                        <GradientStop Color="White"/>
+                                                                                        <GradientStop Color="White" Offset="1"/>
+                                                                                    </LinearGradientBrush>
+                                                                                </DatePicker.Background>
+                                                                                <DatePicker.Resources>
+                                                                                    <Style TargetType="{x:Type DatePickerTextBox}">
+                                                                                        <Setter Property="Text" Value="Select date" />
+                                                                                        <Setter Property="Focusable" Value="False"/>
+                                                                                        <!--<Setter Property="IsReadOnly" Value="True"/>-->
+                                                                                        <!--<Setter Property="Background">
+                                                                                            <Setter.Value>
+                                                                                                <ImageBrush ImageSource="/LIT.Core;component/Media/Images/folder.png" Opacity="0"/>
+                                                                                            </Setter.Value>
+                                                                                        </Setter>-->
+                                                                                    </Style>
+                                                                                </DatePicker.Resources>
+                                                                            </DatePicker>
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellEditingTemplate>
+                                                            </DataGridTemplateColumn>
+                                                            <DataGridTemplateColumn Header="Pricing" MinWidth="180"  Width="*" >
+                                                                <DataGridTemplateColumn.HeaderStyle>
+                                                                    <Style TargetType="DataGridColumnHeader">
+                                                                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                                                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                        <Setter Property="Foreground" Value="#252E39" />
+                                                                        <Setter Property="FontSize" Value="14" />
+                                                                        <Setter Property="FontWeight" Value="Medium" />
+                                                                        <Setter Property="FontFamily" Value="Calibri"/>
+                                                                    </Style>
+                                                                </DataGridTemplateColumn.HeaderStyle>
+                                                                <DataGridTemplateColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <Button Name="btnPricing" Content="Pricing"  Template="{StaticResource ButtonBaseTemplate}" Background="#579F00"  Foreground="#ffffff" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Hand" VerticalContentAlignment="Center" Padding="12,1,12,1" FontSize="14" MouseEnter="msEnter" MouseLeave="msLeave" Click="btnPricing_Click" >
+                                                                            <!--<Image Source="../Images/edit_black.png" Width="16" Height="16" />-->
+                                                                        </Button>
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellTemplate>
+                                                            </DataGridTemplateColumn>
+                                                            <DataGridTemplateColumn  Header="Delete" MinWidth="150" Width="*" >
+                                                                <DataGridTemplateColumn.HeaderStyle>
+                                                                    <Style TargetType="DataGridColumnHeader">
+                                                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                                                                        <Setter Property="Foreground" Value="#252E39" />
+                                                                        <Setter Property="FontSize" Value="14" />
+                                                                        <Setter Property="FontWeight" Value="Medium" />
+                                                                        <Setter Property="FontFamily" Value="Calibri"/>
+                                                                    </Style>
+                                                                </DataGridTemplateColumn.HeaderStyle>
+                                                                <DataGridTemplateColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <Button Name="btnRatesDelete" Click="btnRatesDelete_Click" FontFamily="Calibri" Padding="12,1,12,1" FontSize="14" Template="{StaticResource ButtonBaseTemplate}" Background="Transparent"  Foreground="#FF003D" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="&#10006;" Cursor="Hand" MouseEnter="msCrossEnter" MouseLeave="msCrossLeave"  >
+                                                                            <!--<Image Source="../Images/delete_black.png" Width="16" Height="16" />-->
+                                                                        </Button>
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellTemplate>
+                                                            </DataGridTemplateColumn>
+                                                        </DataGrid.Columns>
+                                                        <!--<DataGrid.Style>
+                                                            <Style TargetType="DataGrid">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding HasItems, RelativeSource={RelativeSource Self}}" Value="false">
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="DataGrid">
+                                                                                    <Grid>
+                                                                                        <Grid.RowDefinitions>
+                                                                                            <RowDefinition Height="Auto" />
+                                                                                            <RowDefinition Height="*" />
+                                                                                        </Grid.RowDefinitions>
+                                                                                        <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                                                        <TextBlock Text="No records found..." Grid.Row="1" />
+                                                                                    </Grid>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </DataGrid.Style>-->
+                                                    </DataGrid>
+                                                </StackPanel>
+                                            </Grid>
+
+
+
+                                        </TabItem>
+                                        <TabItem Header="Warning" Name="SupplierRatesWarning" Style="{StaticResource TabItemGrey}" FontFamily="Calibri" Width="131" FontSize="16" Height="48" Cursor="Hand">
+                                            <StackPanel>
+
+                                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Panel.ZIndex="9">
+                                                    <!--<CheckBox x:Name="chbhidenonactivewarning" FontFamily="Calibri" Content="Hide Non Active Items" Click="chbhidenonactivewarning_Click"></CheckBox>-->
+                                                    <CheckBox x:Name="chbhideexpiredseasonswarning"  FontFamily="Calibri" Content="Hide Expired Seasons" Click="chbhideexpiredseasonswarning_Click" Margin="0,5,0,10" FontSize="14" Foreground="#ff53555E" FontWeight="Bold" IsEnabled="False"></CheckBox>
+
+                                                </StackPanel>
+                                                <Grid x:Name="StackRateswarning" Height="400" Width="auto" Background="White">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="300" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="300" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="28" />
+                                                        <RowDefinition Height="450" />
+                                                        <RowDefinition Height="28" />
+                                                        <RowDefinition Height="450" />
+                                                    </Grid.RowDefinitions>
+                                                    <StackPanel Grid.Column="0" Grid.Row="0" >
+                                                        <Label Content="Service warnings, show when using this service" FontFamily="Calibri" HorizontalAlignment="Left" FontSize="14" Margin="2,0,0,0"></Label>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1" Grid.Row="0">
+                                                        <Button Content="&#43; Add" Style="{StaticResource btnBlue}" Name="BtnServWarningAdd" Click="BtnServWarningAdd_Click" HorizontalAlignment="Right" VerticalAlignment="Top" FontFamily="Calibri" Height="25" FontSize="14" BorderBrush="#FF579F00" Foreground="#FF579F00" FontWeight="Bold" MaxWidth="140" Width="88" Cursor="Hand">
+                                                            <Button.Background>
+                                                                <SolidColorBrush Color="#FF579F00" Opacity="0"/>
+                                                            </Button.Background>
+
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="0" Grid.Row="1" Margin="5,0,5,0"  Grid.ColumnSpan="2" VerticalAlignment="Top">
+
+                                                        <DataGrid behavior:NewSingleClickDataGridBehavior.EnableSingleClickEditing="True" x:Name="dgServicesWarnings" ColumnWidth="*" HorizontalAlignment="Left"  AutoGenerateColumns="False" CanUserAddRows="False" BorderThickness="1,1,1,0" BorderBrush="#c9c9c9" HorizontalGridLinesBrush="#C9C9C9" VerticalGridLinesBrush="#C9C9C9" Background="White"
+                                                                    SelectedCellsChanged="dgServicesWarnings_SelectedCellsChanged"
+                                                              RowDetailsVisibilityMode="VisibleWhenSelected">
+
+                                                            <DataGrid.Columns>
+                                                                <DataGridTextColumn Header="ServiceID" Binding="{Binding ServiceID}"  Visibility="Hidden">
+                                                                    <DataGridTextColumn.CellStyle>
+                                                                        <Style>
+                                                                        </Style>
+                                                                    </DataGridTextColumn.CellStyle>
+                                                                </DataGridTextColumn>
+                                                                <DataGridTextColumn Header="SupplierServiceDetailsWarningID" Binding="{Binding SupplierServiceDetailsWarningID}" Visibility="Hidden">
+                                                                    <DataGridTextColumn.CellStyle>
+                                                                        <Style>
+                                                                        </Style>
+                                                                    </DataGridTextColumn.CellStyle>
+                                                                </DataGridTextColumn>
+                                                                <DataGridTemplateColumn Header="Valid From" Width="*" MinWidth="120">
+                                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                                        <Style TargetType="DataGridColumnHeader">
+                                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                                            <Setter Property="FontFamily" Value="Calibri"/>
+
+                                                                        </Style>
+                                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <DatePicker  x:Name="Txtvalidfromserwarning" SelectedDate="{Binding ValidFromwarning, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0" >
+                                                                                <DatePicker.Background>
+                                                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                        <GradientStop Color="White"/>
+                                                                                        <GradientStop Color="White" Offset="1"/>
+                                                                                    </LinearGradientBrush>
+                                                                                </DatePicker.Background>
+
+                                                                            </DatePicker>
+                                                                        </DataTemplate>
+
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                                                        <DataTemplate>
+                                                                            <Grid FocusManager.FocusedElement="{Binding ElementName= Txtvalidfromserwarning}" >
+                                                                                <DatePicker  x:Name="Txtvalidfromserwarning" SelectedDate="{Binding ValidFromwarning, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0">
+                                                                                    <DatePicker.Background>
+                                                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                            <GradientStop Color="White"/>
+                                                                                            <GradientStop Color="White" Offset="1"/>
+                                                                                        </LinearGradientBrush>
+                                                                                    </DatePicker.Background>
+                                                                                </DatePicker>
+                                                                            </Grid>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                                                </DataGridTemplateColumn>
+                                                                <DataGridTemplateColumn Header="Valid To" Width="*" MinWidth="110">
+                                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                                        <Style TargetType="DataGridColumnHeader">
+                                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                                            <Setter Property="FontFamily" Value="Calibri"/>
+                                                                        </Style>
+                                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <DatePicker  x:Name="Txtvalidtoserwarning" SelectedDate="{Binding ValidTowarning, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="0,0,0,0">
+                                                                                <DatePicker.Background>
+                                                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                        <GradientStop Color="White"/>
+                                                                                        <GradientStop Color="White" Offset="1"/>
+                                                                                    </LinearGradientBrush>
+                                                                                </DatePicker.Background>
+                                                                            </DatePicker>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                                                        <DataTemplate>
+                                                                            <Grid FocusManager.FocusedElement="{Binding ElementName= Txtvalidtoserwarning}" >
+                                                                                <DatePicker  x:Name="Txtvalidtoserwarning" SelectedDate="{Binding ValidTowarning, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="0,0,0,0">
+                                                                                    <DatePicker.Background>
+                                                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                            <GradientStop Color="White"/>
+                                                                                            <GradientStop Color="White" Offset="1"/>
+                                                                                        </LinearGradientBrush>
+                                                                                    </DatePicker.Background>
+                                                                                </DatePicker>
+                                                                            </Grid>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                                                </DataGridTemplateColumn>
+                                                                <DataGridTextColumn Header="Description" Binding="{Binding WarDescription}" Width="*" MinWidth="150">
+                                                                    <DataGridTextColumn.HeaderStyle>
+                                                                        <Style TargetType="DataGridColumnHeader">
+                                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                                            <Setter Property="FontFamily" Value="Calibri" />
+
+                                                                        </Style>
+                                                                    </DataGridTextColumn.HeaderStyle>
+                                                                    <DataGridTextColumn.ElementStyle>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                                        </Style>
+                                                                    </DataGridTextColumn.ElementStyle>
+                                                                </DataGridTextColumn>
+                                                                <DataGridTemplateColumn Width="45" Header="" >
+                                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                                        <Style TargetType="DataGridColumnHeader">
+                                                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                                            <Setter Property="FontFamily" Value="Calibri"/>
+                                                                        </Style>
+                                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <Button Name="btnSerWarnDelete"  Click="btnSerWarnDelete_Click" FontFamily="Calibri"  FontSize="12" Template="{StaticResource ButtonBaseTemplate}" Background="Transparent"  Foreground="#FF003D" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="&#10006;" Cursor="Hand" MouseEnter="msCrossEnter" MouseLeave="msCrossLeave" >
+                                                                                <!--<Image Source="../Images/delete_black.png" Width="16" Height="16" />-->
+                                                                            </Button>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                </DataGridTemplateColumn>
+                                                            </DataGrid.Columns>
+                                                        </DataGrid>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2" Grid.Row="0" >
+                                                        <Label Content="Supplier warnings, show when using this supplier" FontFamily="Calibri" HorizontalAlignment="Left" FontSize="14" Margin="2,0,0,0"></Label>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="3" Grid.Row="0">
+                                                        <Button Content="&#43; Add" Style="{StaticResource btnBlue}" Name="BtnSuppWarningAdd" Click="BtnSuppWarningAdd_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" Height="25" FontSize="14" BorderBrush="#FF579F00" Foreground="#FF579F00" FontWeight="Bold" MaxWidth="140" Width="50" Cursor="Hand">
+                                                            <Button.Background>
+                                                                <SolidColorBrush Color="#FF579F00" Opacity="0"/>
+                                                            </Button.Background>
+
+                                                        </Button>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="2" Grid.Row="1" Margin="5,0,5,0" Height="330" Grid.ColumnSpan="2" VerticalAlignment="Top">
+
+                                                        <DataGrid behavior:NewSingleClickDataGridBehavior.EnableSingleClickEditing="True" x:Name="dgSuppWarnings" Height="330" ColumnWidth="*" Width="Auto" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" BorderThickness="1,1,1,0" BorderBrush="#c9c9c9" HorizontalGridLinesBrush="#C9C9C9" VerticalGridLinesBrush="#C9C9C9" Background="White" 
+                                                                   SelectedCellsChanged="dgSuppWarnings_SelectedCellsChanged"
+                                                              RowDetailsVisibilityMode="VisibleWhenSelected">
+                                                            <DataGrid.Columns>
+                                                                <DataGridTextColumn Header="ServiceID" Binding="{Binding ServiceID}"  Visibility="Hidden">
+                                                                    <DataGridTextColumn.CellStyle>
+                                                                        <Style>
+                                                                        </Style>
+                                                                    </DataGridTextColumn.CellStyle>
+                                                                </DataGridTextColumn>
+                                                                <DataGridTextColumn Header="SupplierServiceDetailsWarningID" Binding="{Binding SupplierServiceDetailsWarningID}" Visibility="Hidden">
+                                                                    <DataGridTextColumn.CellStyle>
+                                                                        <Style>
+                                                                        </Style>
+                                                                    </DataGridTextColumn.CellStyle>
+                                                                </DataGridTextColumn>
+                                                                <DataGridTemplateColumn Header="Valid From" Width="*" MinWidth="120">
+                                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                                        <Style TargetType="DataGridColumnHeader">
+                                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                                            <Setter Property="FontFamily" Value="Calibri"/>
+                                                                        </Style>
+                                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <DatePicker  x:Name="Txtvalidfromsuppwarning" SelectedDate="{Binding ValidFromwarning, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0">
+                                                                                <DatePicker.Background>
+                                                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                        <GradientStop Color="White"/>
+                                                                                        <GradientStop Color="White" Offset="1"/>
+                                                                                    </LinearGradientBrush>
+                                                                                </DatePicker.Background>
+                                                                            </DatePicker>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                                                        <DataTemplate>
+                                                                            <Grid FocusManager.FocusedElement="{Binding ElementName= Txtvalidfromsuppwarning}" >
+                                                                                <DatePicker  x:Name="Txtvalidfromsuppwarning" SelectedDate="{Binding ValidFromwarning, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0">
+                                                                                    <DatePicker.Background>
+                                                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                            <GradientStop Color="White"/>
+                                                                                            <GradientStop Color="White" Offset="1"/>
+                                                                                        </LinearGradientBrush>
+                                                                                    </DatePicker.Background>
+                                                                                </DatePicker>
+                                                                            </Grid>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                                                </DataGridTemplateColumn>
+                                                                <DataGridTemplateColumn Header="Valid To" Width="*" MinWidth="120">
+                                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                                        <Style TargetType="DataGridColumnHeader">
+                                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                                            <Setter Property="FontFamily" Value="Calibri"/>
+                                                                        </Style>
+                                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <DatePicker  x:Name="Txtvalidtosuppwarning" SelectedDate="{Binding ValidTowarning, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0">
+                                                                                <DatePicker.Background>
+                                                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                        <GradientStop Color="White"/>
+                                                                                        <GradientStop Color="White" Offset="1"/>
+                                                                                    </LinearGradientBrush>
+                                                                                </DatePicker.Background>
+                                                                            </DatePicker>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                                                        <DataTemplate>
+                                                                            <Grid FocusManager.FocusedElement="{Binding ElementName= Txtvalidtosuppwarning}" >
+                                                                                <DatePicker  x:Name="Txtvalidtosuppwarning" SelectedDate="{Binding ValidTowarning, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0" >
+                                                                                    <DatePicker.Background>
+                                                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                                            <GradientStop Color="White"/>
+                                                                                            <GradientStop Color="White" Offset="1"/>
+                                                                                        </LinearGradientBrush>
+                                                                                    </DatePicker.Background>
+                                                                                </DatePicker>
+                                                                            </Grid>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                                                </DataGridTemplateColumn>
+                                                                <DataGridTextColumn Header="Description" Binding="{Binding WarDescription}" Width="*" MinWidth="120">
+                                                                    <DataGridTextColumn.HeaderStyle>
+                                                                        <Style TargetType="DataGridColumnHeader">
+                                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                                            <Setter Property="FontFamily" Value="Calibri" />
+
+                                                                        </Style>
+                                                                    </DataGridTextColumn.HeaderStyle>
+                                                                    <DataGridTextColumn.ElementStyle>
+                                                                        <Style TargetType="TextBlock">
+                                                                            <Setter Property="HorizontalAlignment" Value="Left" />
+                                                                            <Setter Property="VerticalAlignment" Value="Center" />
+
+                                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                                        </Style>
+                                                                    </DataGridTextColumn.ElementStyle>
+                                                                </DataGridTextColumn>
+                                                                <DataGridTemplateColumn Width="45"  Header="" >
+                                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                                        <Style TargetType="DataGridColumnHeader">
+                                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                                            <Setter Property="FontFamily" Value="Calibri"/>
+                                                                        </Style>
+                                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                                    <DataGridTemplateColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <Button Name="btnSuppWarnDelete" Click="btnSuppWarnDelete_Click" FontFamily="Calibri" FontSize="12" Template="{StaticResource ButtonBaseTemplate}" Background="Transparent"  Foreground="#FF003D" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="&#10006;" Cursor="Hand" MouseEnter="msCrossEnter" MouseLeave="msCrossLeave" >
+                                                                                <!--<Image Source="../Images/delete_black.png" Width="16" Height="16" />-->
+                                                                            </Button>
+                                                                        </DataTemplate>
+                                                                    </DataGridTemplateColumn.CellTemplate>
+                                                                </DataGridTemplateColumn>
+                                                            </DataGrid.Columns>
+                                                        </DataGrid>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </StackPanel>
+                                        </TabItem>
+
+                                    </TabControl>
+
+
+                                </StackPanel>
+
+
+
+                            </StackPanel>
+
+                            <StackPanel x:Name="StackPricingOption" DockPanel.Dock="Bottom">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Grid.Column="0" Grid.Row="0" Background="#f5f5f5" VerticalAlignment="Center">
+                                        <Label  FontSize="14" Content="Services" 
+                                        FontWeight="Medium" Foreground="#25304C" Height="25" Width="auto" />
+
+                                        <Button  Style="{StaticResource btnBlue}" x:Name="BtnPriceAdd" Click="BtnPriceAdd_Click" 
+                                         Margin="-20,-25,0,0" Background="Transparent" VerticalAlignment="Center"  
+                                         VerticalContentAlignment="Center" FontFamily="Calibri" Height="25" FontSize="16"
+                                         BorderBrush="#FF579F00" Foreground="#FF579F00" FontWeight="Bold" MaxWidth="140"
+                                         Width="58" Cursor="Hand" HorizontalAlignment="Right">
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="/LIT.Core;component/Media/Images/plus.png" Width="13" VerticalAlignment="Center"></Image>
+                                                <Label Foreground="#FF579F00" FontSize="16" VerticalAlignment="Center">Add</Label>
+                                            </StackPanel>
+
+                                        </Button>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" Background="#f9f9f9">
+
+
+                                        <DataGrid behavior:NewSingleClickDataGridBehavior.EnableSingleClickEditing="True" x:Name="dgPricingoption" Height="auto" BorderThickness="1,1,1,1" BorderBrush="#c9c9c9" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalGridLinesBrush="#C9C9C9" VerticalGridLinesBrush="#C9C9C9" MaxHeight="300" VerticalScrollBarVisibility="Auto">
+                                            <DataGrid.Resources>
+                                                <Style TargetType="{x:Type DataGridCell}">
+                                                    <EventSetter Event="MouseDoubleClick" Handler="dgPricingoptionDataGridCell_MouseDoubleClick"/>
+                                                </Style>
+                                            </DataGrid.Resources>
+                                            <DataGrid.Columns>
+
+                                                <DataGridTextColumn Header="PricingOptionId" Binding="{Binding PricingOptionId}"  Visibility="Hidden" Width="0">
+                                                    <DataGridTextColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                        </Style>
+                                                    </DataGridTextColumn.HeaderStyle>
+
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="SupplierServiceDetailsRateId" Binding="{Binding SupplierServiceDetailsRateId}" Visibility="Hidden" Width="0">
+                                                    <DataGridTextColumn.CellStyle>
+                                                        <Style></Style>
+                                                    </DataGridTextColumn.CellStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="SupplierServiceId" Binding="{Binding SupplierServiceId}" Visibility="Hidden" Width="0">
+                                                    <DataGridTextColumn.CellStyle>
+                                                        <Style>
+                                                        </Style>
+                                                    </DataGridTextColumn.CellStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridCheckBoxColumn Header="Select" MinWidth="80" Width="*" x:Name="Chbselectedforbkg" Binding="{Binding selectedforbkg, UpdateSourceTrigger=PropertyChanged}" Visibility="Visible">
+                                                    <DataGridCheckBoxColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <!--<Setter Property="Foreground" Value="#252E39" />-->
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.HeaderStyle>
+                                                    <DataGridCheckBoxColumn.ElementStyle >
+                                                        <Style TargetType="CheckBox">
+                                                            <Setter Property="IsChecked" Value="{Binding selectedforbkg}"></Setter>
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <!--<Setter Property="behavior:SingleClickCheckBoxBehavior.IsEnabled" Value="True"></Setter>-->
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.ElementStyle>
+                                                    <DataGridCheckBoxColumn.EditingElementStyle>
+                                                        <Style TargetType="CheckBox">
+                                                            <Setter Property="IsChecked" Value="{Binding selectedforbkg, Mode=OneWay}"/>
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.EditingElementStyle>
+
+                                                </DataGridCheckBoxColumn>
+                                                <DataGridCheckBoxColumn Header="Active" x:Name="ChbPriceisactive" Binding="{Binding PriceIsActive, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden" IsReadOnly="True">
+                                                    <DataGridCheckBoxColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.HeaderStyle>
+                                                    <DataGridCheckBoxColumn.ElementStyle >
+                                                        <Style TargetType="CheckBox">
+                                                            <Setter Property="IsChecked" Value="{Binding PriceIsActive}"></Setter>
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="IsEnabled" Value="False"></Setter>
+                                                            <!--<Setter Property="behavior:SingleClickCheckBoxBehavior.IsEnabled" Value="True"></Setter>-->
+
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.ElementStyle>
+                                                    <DataGridCheckBoxColumn.EditingElementStyle>
+                                                        <Style TargetType="CheckBox">
+                                                            <Setter Property="IsChecked" Value="{Binding PriceIsActive, Mode=OneWay}"/>
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                            <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.EditingElementStyle>
+
+                                                </DataGridCheckBoxColumn>
+                                                <DataGridTextColumn Header="Option Name" Binding="{Binding PricingOptionName, UpdateSourceTrigger=PropertyChanged}" MinWidth="170" Width="*">
+                                                    <DataGridTextColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+
+                                                        </Style>
+                                                    </DataGridTextColumn.HeaderStyle>
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+
+                                                </DataGridTextColumn>
+
+                                                <DataGridComboBoxColumn Header="Type" x:Name="CmbPriceType"  DisplayMemberPath="."
+                                             SelectedItemBinding="{Binding PriceTypeSelectedItem, UpdateSourceTrigger=PropertyChanged}" Width="210" Visibility="Hidden">
+                                                    <DataGridComboBoxColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                        </Style>
+                                                    </DataGridComboBoxColumn.HeaderStyle>
+                                                    <DataGridComboBoxColumn.ElementStyle >
+                                                        <Style TargetType="ComboBox">
+                                                            <Setter Property="ItemsSource" Value="{Binding Path=ListofSupplierServiceType, Mode=OneWay}" />
+                                                            <Setter Property="IsSynchronizedWithCurrentItem" Value="False"/>
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                        </Style>
+                                                    </DataGridComboBoxColumn.ElementStyle>
+                                                    <DataGridComboBoxColumn.EditingElementStyle>
+                                                        <Style TargetType="ComboBox">
+                                                            <Setter Property="ItemsSource" Value="{Binding Path=ListofSupplierServiceType, Mode=OneWay}"/>
+                                                            <Setter Property="IsDropDownOpen" Value="True" />
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                        </Style>
+                                                    </DataGridComboBoxColumn.EditingElementStyle>
+
+                                                </DataGridComboBoxColumn>
+
+                                                <DataGridCheckBoxColumn Header="Default" x:Name="PriceIsDefault" Binding="{Binding PriceIsDefault, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden" IsReadOnly="True">
+                                                    <DataGridCheckBoxColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.HeaderStyle>
+                                                    <DataGridCheckBoxColumn.ElementStyle >
+                                                        <Style TargetType="CheckBox">
+                                                            <Setter Property="IsChecked" Value="{Binding PriceIsDefault}"></Setter>
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <!--<Setter Property="behavior:SingleClickCheckBoxBehavior.IsEnabled" Value="True"></Setter>-->
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.ElementStyle>
+                                                    <DataGridCheckBoxColumn.EditingElementStyle>
+                                                        <Style TargetType="CheckBox">
+                                                            <Setter Property="IsChecked" Value="{Binding PriceIsDefault, Mode=OneWay}"/>
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                        </Style>
+                                                    </DataGridCheckBoxColumn.EditingElementStyle>
+
+                                                </DataGridCheckBoxColumn>
+                                                <!--<DataGridTextColumn Header="Net Price" Binding="{Binding NetPrice, StringFormat=N2}" Width="150" IsReadOnly="True">
+                                                            <DataGridTextColumn.HeaderStyle>
+                                                                <Style TargetType="DataGridColumnHeader">
+                                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                                                </Style>
+                                                            </DataGridTextColumn.HeaderStyle>
+                                                            <DataGridTextColumn.ElementStyle>
+                                                                <Style TargetType="TextBlock">
+                                                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                    <Setter Property="Padding" Value="0,0,5,0" />
+                                                                    <Setter Property="Text" Value="{Binding NetPrice, StringFormat=N2}" />
+                                                                </Style>
+                                                            </DataGridTextColumn.ElementStyle>
+                                                        </DataGridTextColumn>
+                                                        <DataGridTextColumn Header="Mup" Binding="{Binding MarkupPercentage, StringFormat=N2}" Width="150" IsReadOnly="True">
+                                                            <DataGridTextColumn.HeaderStyle>
+                                                                <Style TargetType="DataGridColumnHeader">
+                                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                                    <Setter Property="FontFamily" Value="Calibri" />
+
+                                                                </Style>
+                                                            </DataGridTextColumn.HeaderStyle>
+                                                            <DataGridTextColumn.ElementStyle>
+                                                                <Style TargetType="TextBlock">
+                                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                    <Setter Property="Text" Value="{Binding MarkupPercentage, StringFormat=N2}" />
+                                                                </Style>
+                                                            </DataGridTextColumn.ElementStyle>
+                                                        </DataGridTextColumn>
+                                                        <DataGridTextColumn Header="Gross Price" Binding="{Binding GrossPrice, StringFormat=N2}" Width="150" IsReadOnly="True">
+                                                            <DataGridTextColumn.HeaderStyle>
+                                                                <Style TargetType="DataGridColumnHeader">
+                                                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                                    <Setter Property="Foreground" Value="#252E39" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                    <Setter Property="FontWeight" Value="Medium" />
+                                                                    <Setter Property="FontFamily" Value="Calibri" />
+
+
+                                                                </Style>
+                                                            </DataGridTextColumn.HeaderStyle>
+                                                            <DataGridTextColumn.ElementStyle>
+                                                                <Style TargetType="TextBlock">
+                                                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                                    <Setter Property="FontFamily" Value="Calibri" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                    <Setter Property="Padding" Value="0,0,5,0" />
+                                                                    <Setter Property="Text" Value="{Binding GrossPrice, StringFormat=N2}" />
+                                                                </Style>
+                                                            </DataGridTextColumn.ElementStyle>
+                                                        </DataGridTextColumn>-->
+
+                                                <DataGridTemplateColumn Header="Net Price" MinWidth="200" Width="*" IsReadOnly="True">
+                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+
+                                                        </Style>
+                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="1*" />
+                                                                    <ColumnDefinition Width="auto" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <TextBlock Grid.Column="0" Text="{Binding CurrencyDisplayFormat }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" />
+                                                                <TextBlock Grid.Column="1" Text="{Binding NetPrice,StringFormat=N2}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn Header="Markup Percentage" MinWidth="150" Width="*" IsReadOnly="True">
+                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+
+                                                        </Style>
+                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="1*" />
+                                                                    <ColumnDefinition Width="auto" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <TextBlock Grid.Column="0" Text="{Binding MarkupPercentage,StringFormat=N2,UpdateSourceTrigger=LostFocus}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                                                <TextBlock Grid.Column="1" Text="%" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,1,0" Margin="0,0,1,0"  />
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn Header="Gross Price" MinWidth="150" Width="*"  IsReadOnly="True">
+                                                    <DataGridTemplateColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+
+
+                                                        </Style>
+                                                    </DataGridTemplateColumn.HeaderStyle>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="1*" />
+                                                                    <ColumnDefinition Width="auto" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Grid.Column="0" Text="{Binding CurrencyDisplayFormat }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" />
+                                                                <TextBlock Grid.Column="1" Text="{Binding GrossPrice,StringFormat=N2}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+
+                                                </DataGridTemplateColumn>
+
+                                                <DataGridTextColumn Header="Commission Percentage" Binding="{Binding CommissionPercentage}" Width="180" IsReadOnly="True" Visibility="Hidden">
+                                                    <DataGridTextColumn.HeaderStyle>
+                                                        <Style TargetType="DataGridColumnHeader">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                            <Setter Property="Foreground" Value="#252E39" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                            <Setter Property="FontWeight" Value="Medium" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+
+                                                        </Style>
+                                                    </DataGridTextColumn.HeaderStyle>
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                                            <Setter Property="FontFamily" Value="Calibri" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+
+
+                                            </DataGrid.Columns>
+                                            <!--<DataGrid.Style>
+                                                <Style TargetType="DataGrid">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding HasItems, RelativeSource={RelativeSource Self}}" Value="false">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="DataGrid">
+                                                                        <Grid>
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="*" />
+                                                                            </Grid.RowDefinitions>
+                                                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                                            <TextBlock Text="No records found..." Grid.Row="1" />
+                                                                        </Grid>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </DataGrid.Style>-->
+                                        </DataGrid>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="0" Background="#f5f5f5" Grid.Row="2" >
+                                        <Grid  HorizontalAlignment="Right"  VerticalAlignment="Bottom"   Width="auto">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <Button Content="OK" Template="{StaticResource ButtonBaseTemplate}"  Margin="0,0,90,0" Height="auto" Padding="30,4,5,5" Name="btnSelectforbkg" Grid.Column="1" Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Center"  VerticalContentAlignment="Center" FontFamily="Calibri"  FontSize="14"  BorderBrush="#c9c9c9" Foreground="#252e39" FontWeight="Normal" MaxWidth="140" Width="80" Cursor="Hand" Click="btnSelectforbkg_Click">
+                                                <Button.Background>
+                                                    <SolidColorBrush Color="White" Opacity="1"/>
+                                                </Button.Background>
+                                                <Button.Resources>
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Setter Property="CornerRadius" Value="3"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                            </Button>
+
+                                            <Button Content="Cancel" Template="{StaticResource ButtonBaseTemplate}"  Margin="0,10,5,10" Height="auto" Padding="22,4,5,5" Name="btncancelforssc" Grid.Column="1" Grid.Row="0"  HorizontalAlignment="Right" VerticalAlignment="Center"  VerticalContentAlignment="Center" FontFamily="Calibri"  FontSize="14"  BorderBrush="#c9c9c9" Foreground="#252e39" FontWeight="Normal" MaxWidth="140" Width="80" Cursor="Hand" Click="btncancelforssc_Click">
+                                                <Button.Background>
+                                                    <SolidColorBrush Color="White" Opacity="1"/>
+                                                </Button.Background>
+                                                <Button.Resources>
+                                                    <Style TargetType="{x:Type Border}">
+                                                        <Setter Property="CornerRadius" Value="3"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                            </Button>
+
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+
+                        </DockPanel>
+
+                        <TextBox x:Name="hdnSupplierid" Visibility="Collapsed"></TextBox>
+                        <TextBox x:Name="hdnserviceid" Visibility="Collapsed"></TextBox>
+                        <TextBox x:Name="hdnloginusername" Visibility="Collapsed"></TextBox>
+                        <TextBox x:Name="hdnSuppliermode" Visibility="Collapsed"></TextBox>
+                        <DatePicker  x:Name="hdnNewStartDate" Visibility="Collapsed"></DatePicker>
+                    </Grid>
+                </DockPanel>
+
+
+
+            </TabItem>
+
+
+
+        </TabControl>
+    </Grid>
+</Window>

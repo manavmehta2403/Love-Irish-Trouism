@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup Label="Globals">
+		<SccProjectName>SAK</SccProjectName>
+		<SccProvider>SAK</SccProvider>
+		<SccAuxPath>SAK</SccAuxPath>
+		<SccLocalPath>SAK</SccLocalPath>
+	</PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="DocumentFormat.OpenXml" Version="2.20.0" />
+		<PackageReference Include="iTextSharp" Version="5.5.13.3" />
+		<PackageReference Include="itextsharp.xmlworker" Version="5.5.13.3" />
+		<PackageReference Include="Nuctech.Xaml.Behaviors.Wpf" Version="1.0.2" />
+		<PackageReference Include="Prism.Unity" Version="8.1.97" />
+		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
+		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.1" />
+		<PackageReference Include="SuperJMN.Microsoft.Xaml.Behaviors.Wpf" Version="1.0.2" />
+
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\LIT.Core\LIT.Core.csproj" />
+		<ProjectReference Include="..\LITModels\LITModels.csproj" />
+		<ProjectReference Include="..\Modules\LIT.Modules.TabControl\LIT.Modules.TabControl.csproj" />
+		<ProjectReference Include="..\SQLDataAccessLayer\SQLDataAccessLayer.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Views\SupplierPaymentSearchTab.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+</Project>

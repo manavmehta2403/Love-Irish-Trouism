@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:conv="clr-namespace:LIT.Core.Converters">
+
+    <conv:BreakPointsTypeConverter x:Key="BreakPointsTypeConverter" />
+    <conv:ConvertHeightRespectedWithMainWindow x:Key="ConvertHeightRespectedWithMainWindow" />
+    <conv:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
+    <conv:InvertBoolean x:Key="InvertBoolean" />
+    <conv:SelectedToBackgroundConverter x:Key="SelectedToBackgroundConverter"/>
+    <conv:WidthToVisibilityConverter x:Key="WidthToVisibilityConverter"/>
+    <conv:GreaterThanBoolenConvter x:Key="GreaterThanBoolenConvter"/>
+    <conv:GreaterThanConverter x:Key="GreaterThanConverter" />
+    <conv:SubtractionConverter x:Key="SubtractionConverter"/>
+    <conv:StringNullOrEmptyToVisibilityConverter x:Key="StringNullOrEmptyToVisibilityConverter" />
+    <conv:ListToVisibilityConverter x:Key="ListToVisibilityConverter" />
+    <conv:ListToVisibilityInvertConverter x:Key="ListToVisibilityInvertConverter" />
+
+</ResourceDictionary>

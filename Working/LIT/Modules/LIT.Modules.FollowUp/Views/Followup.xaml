@@ -1,0 +1,351 @@
+<UserControl x:Class="LIT.Modules.TabControl.Views.Followup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LIT.Modules.TabControl.ViewModels"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:rg="clr-namespace:LIT.Core.Controls.GridExtensions;assembly=LIT.Core"
+             xmlns:viewmodels="clr-namespace:LIT.Modules.TabControl.ViewModels"
+             
+             d:DataContext="{d:DesignInstance Type=viewmodels:FollowupViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:behavior="clr-namespace:LIT.Core.Behaviors;assembly=LIT.Core">
+  <!--<UserControl.Resources>
+        <local:EmptyCollectionToNullConverter x:Key="EmptyToNull"/>
+    </UserControl.Resources>-->
+  <Grid>
+
+    <Grid.Resources>
+      <Style TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="Height" Value="60" />
+      </Style>
+    </Grid.Resources>
+    <rg:ResponsiveGrid>
+      <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="3" />
+      <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="6" />
+      <Border rg:ResponsiveGrid.XS="12" rg:ResponsiveGrid.SM="3" />
+    </rg:ResponsiveGrid>
+
+        <DataGrid Grid.Row="0" ItemsSource = "{Binding Folluptask}" SelectedItem="{Binding SelectedItem}" Grid.Column="0" Name="dgFollowupTask" HorizontalGridLinesBrush="#D8D9D9" VerticalGridLinesBrush="#D8D9D9"
+                  BorderBrush="#D8D9D9" BorderThickness="0,1,0,0" Height="300" VerticalAlignment="Top" Background="#fff" Margin="0,0,0,0"
+                  CanUserAddRows="False" AutoGenerateColumns="False" behavior:SingleClickDataGridBehavior.EnableSingleClickEditing="True">
+      <DataGrid.Resources>
+        <Style TargetType="{x:Type DataGridCell}">
+          <EventSetter Event="MouseDoubleClick" Handler="dgFollowupTaskDataGridCell_MouseDoubleClick"/>
+
+        </Style>
+      </DataGrid.Resources>
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="ItineraryID" Binding="{Binding ItineraryID}" FontSize="14" FontFamily="Calibri" Visibility="Hidden" />
+        <DataGridTextColumn Header="Taskid" Binding="{Binding Taskid}" FontSize="14" FontFamily="Calibri" Visibility="Hidden" />
+        <DataGridTextColumn Header="BookingID" Binding="{Binding BookingID}" FontSize="14" FontFamily="Calibri" Visibility="Hidden" />
+                <DataGridTemplateColumn Header="Date Created" x:Name="Datecreated" MinWidth="120" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center" Background="White">
+                                <DatePicker  x:Name="TxtDateCreated" SelectedDate="{Binding DateCreated, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="110" Height="22" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center"  BorderThickness="0,0,0,0" HorizontalContentAlignment="Center">
+                                    <DatePicker.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </DatePicker.Background>
+                                </DatePicker>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <DatePicker  x:Name="TxtDateCreated" SelectedDate="{Binding DateCreated, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="22" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0" >
+                                    <DatePicker.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </DatePicker.Background>
+                                </DatePicker>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="Foreground" Value="#252E39" />
+                            <Setter Property="FontFamily" Value="Calibri"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Task Name" x:Name="TaskName" Width="130" >
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Padding="5 0 0 0" VerticalAlignment="Center" Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="14" FontFamily="Calibri"></TextBlock>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="14" FontFamily="Calibri"></TextBox>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+          <DataGridTemplateColumn.HeaderStyle>
+            <Style TargetType="DataGridColumnHeader">
+              <Setter Property="HorizontalContentAlignment" Value="Center" />
+              <Setter Property="Foreground" Value="#252E39" />
+              <Setter Property="FontFamily" Value="Calibri"/>
+            </Style>
+          </DataGridTemplateColumn.HeaderStyle>
+        </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Notes" x:Name="taskNotes" Width="250" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Padding="5 0 0 0" VerticalAlignment="Center" Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" FontSize="14" FontFamily="Calibri">
+                                <TextBlock.ToolTip>
+                                    <ToolTip 
+                                         DataContext="{Binding Path=PlacementTarget, RelativeSource={x:Static RelativeSource.Self}}" 
+                                         >
+                                        <TextBlock Text="{Binding Text}" Width="350" TextWrapping="Wrap"/>
+                                        <!-- tooltip content -->
+                                    </ToolTip>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox  Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="14" FontFamily="Calibri"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="Foreground" Value="#252E39" />
+                            <Setter Property="FontFamily" Value="Calibri"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Date Due" x:Name="DateDue" Width="120" >
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel VerticalAlignment="Center">
+                                <DatePicker  x:Name="TxtDatedue" SelectedDate="{Binding DateDue, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="110" Height="22" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0" >
+                  <DatePicker.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                      <GradientStop Color="White"/>
+                      <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                  </DatePicker.Background>
+                </DatePicker>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <StackPanel>
+                                <DatePicker  x:Name="TxtDatedue"   SelectedDate="{Binding DateDue, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="22" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0" >
+                  <DatePicker.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                      <GradientStop Color="White"/>
+                      <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                  </DatePicker.Background>
+                </DatePicker>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+          <DataGridTemplateColumn.HeaderStyle>
+            <Style TargetType="DataGridColumnHeader">
+              <Setter Property="HorizontalContentAlignment" Value="Center" />
+              <Setter Property="Foreground" Value="#252E39" />
+              <Setter Property="FontFamily" Value="Calibri"/>
+            </Style>
+          </DataGridTemplateColumn.HeaderStyle>
+        </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Assigned to" x:Name="Assignedto" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <!--<TextBlock Text="{Binding Path=AssignedtoSelectedItem.FullName, UpdateSourceTrigger=PropertyChanged}" FontSize="14" FontFamily="Calibri"></TextBlock>-->
+                                <!--<TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding>
+                                <Binding Path="FullName"/>
+                                <Binding Path="DataContext.AssignedtoSelectedItem" RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGrid}}"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>-->
+                                <ComboBox x:Name="cmbassingedto"  ItemsSource="{Binding DataContext.Assignedtoval,
+                        RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+  Text="Select" IsSynchronizedWithCurrentItem="False"
+  SelectedItem="{Binding Path=AssignedtoSelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  DisplayMemberPath = "Fullname"
+  FontSize="14" FontFamily="Calibri" Visibility="Hidden">
+
+                                </ComboBox>
+                                <TextBlock Padding="5 0 0 0" VerticalAlignment="Center" Text="{Binding Path=AssignedtoSelectedItem.Fullname, UpdateSourceTrigger=PropertyChanged}" FontSize="14" FontFamily="Calibri"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+
+                            <ComboBox x:Name="cmbassingedto" IsEditable="True"  ItemsSource="{Binding DataContext.Assignedtoval,
+                        RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                Text="Select"
+                SelectedValue="{Binding Path=AssignedtoSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                 DisplayMemberPath = "Fullname"
+                FontSize="14" FontFamily="Calibri">
+                                <ComboBox.Resources>
+                                    <Style TargetType="ToggleButton" >
+                                        <Setter Property="Width" Value="0"/>
+                                    </Style>
+                                </ComboBox.Resources>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="Foreground" Value="#252E39" />
+                            <Setter Property="FontFamily" Value="Calibri"/>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Date Completed" x:Name="Datecompleted" Width="120" >
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel VerticalAlignment="Center">
+                                <DatePicker  x:Name="TxtDateCompleted" SelectedDate="{Binding Datecompleted, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="110" Height="22" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0" >
+                  <DatePicker.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                      <GradientStop Color="White"/>
+                      <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                  </DatePicker.Background>
+                </DatePicker>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <StackPanel>
+                                <DatePicker  x:Name="TxtDateCompleted" SelectedDate="{Binding Datecompleted, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="22" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0" >
+                  <DatePicker.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                      <GradientStop Color="White"/>
+                      <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                  </DatePicker.Background>
+                </DatePicker>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+
+          <DataGridTemplateColumn.HeaderStyle>
+            <Style TargetType="DataGridColumnHeader">
+              <Setter Property="HorizontalContentAlignment" Value="Center" />
+              <Setter Property="Foreground" Value="#252E39" />
+              <Setter Property="FontFamily" Value="Calibri"/>
+            </Style>
+          </DataGridTemplateColumn.HeaderStyle>
+        </DataGridTemplateColumn>
+        
+        
+
+        <DataGridTemplateColumn Width="50"  Header="Delete"  >
+          <DataGridTemplateColumn.HeaderStyle>
+            <Style TargetType="DataGridColumnHeader">
+              <Setter Property="HorizontalContentAlignment" Value="Center" />
+              <Setter Property="Foreground" Value="#252E39" />
+              <Setter Property="FontSize" Value="14" />
+              <Setter Property="FontWeight" Value="Medium" />
+              <Setter Property="FontFamily" Value="Calibri" />
+            </Style>
+          </DataGridTemplateColumn.HeaderStyle>
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="btnFollupDelete" CommandParameter="{Binding}" Command="{Binding DataContext.followCommand.DeleteCommand,
+                                        RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" FontFamily="Calibri"  Background="Transparent"  Foreground="#FF003D" BorderBrush="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="&#10006;" Cursor="Hand" Padding="12,1,12,1"  FontSize="14">
+                  <!--<Image Source="../Images/delete_black.png" Width="16" Height="16" />-->
+                </Button>
+              </StackPanel>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+      <!--<DataGrid.Style>
+                <Style TargetType="DataGrid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Folluptask.Count}" Value="0">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGrid">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <TextBlock Text="No records found..." Grid.Row="1" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Style>-->
+
+    </DataGrid>
+
+
+    <!--Style="{StaticResource btnBlue}"-->
+    <!--<Button x:Name="btnSave" 
+                    Content="Save"                    
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    Command="{Binding SaveFollowUpTaskCommand}" 
+                    FontFamily="Calibri" 
+                    Width="100" 
+                    Height="40" 
+                    FontSize="16" 
+                    Canvas.Left="28" 
+                    Canvas.Top="254" 
+                    Background="#FF579F00" 
+                    BorderBrush="#FF579F00" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    UseLayoutRounding="True" 
+                    Cursor="Hand" />-->
+
+
+    <!---->
+    <!--Command="{Binding AddtaskCommand}"-->
+    <!--<Button x:Name="btnAdd" 
+                    Content="Add"                    
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    Click="btnAdd_Click"
+                    FontFamily="Calibri" 
+                    Width="100" 
+                    Height="40" 
+                    FontSize="16" 
+                    Canvas.Left="78" 
+                    Canvas.Top="254" 
+                    Background="#FF579F00" 
+                    BorderBrush="#FF579F00" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    UseLayoutRounding="True" 
+                    Cursor="Hand" Margin="0,85,0,0" />-->
+  </Grid>
+</UserControl>
+

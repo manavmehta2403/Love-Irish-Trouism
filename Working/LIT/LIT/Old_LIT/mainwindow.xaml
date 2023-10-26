@@ -1,0 +1,538 @@
+﻿<Window x:Class="LIT.Old_LIT.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:LIT.Old_LIT"
+	xmlns:conv="clr-namespace:LIT.Core.Converters;assembly=LIT.Core"
+	xmlns:control = "clr-namespace:LIT"
+        mc:Ignorable="d"
+        Title="Love Irish Tour App" MinWidth="1038" MinHeight="728"  Width="auto" Height="auto" Background="#f4f4f4" WindowStartupLocation="CenterScreen" x:Name="mainwidnowscreen" WindowState="Maximized" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/PasswordBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TreeViewStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ScrollBarStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ExpanderStyle.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Converters/ConvertersMarkupExtensions.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="notifyHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+               
+            </Style>
+        </ResourceDictionary>
+        
+        
+    </Window.Resources>
+    <Grid x:Name="mainbody">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="205" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="White">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition x:Name="ExpanderHeight" Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0" Background="#fffdfdfd" HorizontalAlignment="Stretch">
+                    <DockPanel VerticalAlignment="Center" Height="100">
+                        <Image x:Name="Imgfoldericon" Source="/LIT.Core;component/Media/Images/LIV_interary_logo.png" Width="120" Height="100" Margin="0,-15,0,0"/>
+                    </DockPanel>
+                </StackPanel>
+                <!--<StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="sidebarLft"><tlkit:Accordion HorizontalAlignment="Stretch" x:Name="Accordioncntrl"   Background="White" SelectedItemsChanged="Accordioncntrl_SelectedItemsChanged" ><tlkit:AccordionItem x:Name="AccItinerary" FontFamily="Calibri" FontSize="15" Height="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ><tlkit:AccordionItem.Background><Binding Path="IsSelected" ElementName="AccItinerary"><Binding.Converter><local:SelectedToBackgroundConverter /></Binding.Converter></Binding></tlkit:AccordionItem.Background><tlkit:AccordionItem.Header><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock  Text="Itineraries" Padding="5,3,5,5" Margin="0,0,0,5"  Name="inttab"><TextBlock.Style><Style TargetType="{x:Type TextBlock}"><Style.Triggers><DataTrigger Binding="{Binding ElementName=AccItinerary, Path=IsSelected}" Value="True"><Setter Property="TextElement.FontWeight" Value="Bold"></Setter><Setter Property="TextElement.Foreground" Value="White"></Setter></DataTrigger><DataTrigger Binding="{Binding ElementName=AccItinerary, Path=IsSelected}" Value="False"><Setter Property="TextElement.FontWeight" Value="Normal"></Setter><Setter Property="TextElement.Foreground" Value="White"></Setter></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock></Grid></tlkit:AccordionItem.Header>
+                            -->
+                <!--SelectedItemChanged="TreeView_SelectedItemChanged"-->
+                <!--
+                            <TreeView x:Name="trview" MinWidth="200" MaxWidth="200" ItemsSource="{Binding Items}" MinHeight="510" MaxHeight="510" Height="{Binding ElementName=AccItinerary, Path=ActualHeight}" 
+                                      
+                                      KeyUp="trview_KeyUp" MouseDoubleClick="trview_MouseDoubleClick"
+                                      HorizontalAlignment="Stretch" Background="White" VerticalAlignment="Stretch" FontFamily="Calibri" FontSize="15" BorderThickness="0.5,0.5,0.5,0.5" ItemContainerStyle="{StaticResource LibraryTreeViewItemStyleItinerary}" AllowDrop="True"><TreeView.Resources><HierarchicalDataTemplate x:Name="ItineraryHierDataTemplate" DataType="{x:Type local:NodeViewModel}"  ItemsSource="{Binding Children}" ><StackPanel Orientation="Horizontal"><Image x:Name="Imgfoldericon" Source="{Binding Imageurl}" Margin="0,0,5,0" Width="16" Height="15"></Image><TextBlock Text="{Binding Name}" FontFamily="Calibri" FontSize="15"/></StackPanel></HierarchicalDataTemplate></TreeView.Resources></TreeView></tlkit:AccordionItem><tlkit:AccordionItem Name="accsupplier" FontFamily="Calibri" FontSize="15"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"><tlkit:AccordionItem.Background><Binding Path="IsSelected" ElementName="accsupplier"><Binding.Converter><local:SelectedToBackgroundConverter /></Binding.Converter></Binding></tlkit:AccordionItem.Background><tlkit:AccordionItem.Header><Grid HorizontalAlignment="Stretch"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions><TextBlock Text="Supplier" Padding="5,3,5,5" Margin="0,0,0,5" ><TextBlock.Style><Style TargetType="{x:Type TextBlock}"><Style.Triggers><DataTrigger Binding="{Binding ElementName=accsupplier, Path=IsSelected}" Value="True"><Setter Property="TextElement.FontWeight" Value="Bold"></Setter><Setter Property="TextElement.Foreground" Value="White"></Setter></DataTrigger><DataTrigger Binding="{Binding ElementName=accsupplier, Path=IsSelected}" Value="False"><Setter Property="TextElement.FontWeight" Value="Normal"></Setter><Setter Property="TextElement.Foreground" Value="White"></Setter></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock></Grid></tlkit:AccordionItem.Header>
+
+                            -->
+                <!--SelectedItemChanged="trviewsupplier_SelectedItemChanged"-->
+                <!--
+                            <TreeView  x:Name="trviewsupplier"  ItemsSource="{Binding SupplierItems}"  MinWidth="200" MaxWidth="250"  MinHeight="500"  MaxHeight="500" Height="{Binding ElementName=accsupplier, Path=ActualHeight}"  MouseDoubleClick="trviewsupplier_MouseDoubleClick"  
+                                       KeyUp="trviewsupplier_KeyUp"
+                                       HorizontalAlignment="Stretch" FontFamily="Calibri" FontSize="15" BorderThickness="0.5,0.5,0.5,0.5" VerticalAlignment="Stretch"  AllowDrop="True"><TreeView.ItemContainerStyle><Style TargetType="{x:Type TreeViewItem}"><Setter Property="IsExpanded"
+                        Value="{Binding IsExpandedsupplier, Mode=TwoWay}" /><Setter Property="IsSelected"
+                        Value="{Binding IsSelectedsupplier, Mode=TwoWay}" /><Setter Property="FontWeight"
+                        Value="Normal" />
+                                        -->
+                <!--<EventSetter Event="TreeViewItem.DragOver"  Handler="SuppliertreeView_DragOver"/>-->
+                <!--<EventSetter Event="TreeViewItem.Drop" Handler="SuppliertreeView_Drop"/>-->
+                <!--
+                                        <EventSetter Event="TreeViewItem.MouseMove" Handler="SuppliertreeView_MouseMove"/><EventSetter Event="TreeViewItem.MouseDown" Handler="SuppliertreeView_MouseDown"/><Style.Triggers><Trigger Property="IsSelected"
+                              Value="True"><Setter Property="FontWeight"
+                                    Value="Bold" /></Trigger></Style.Triggers></Style></TreeView.ItemContainerStyle><TreeView.Resources><HierarchicalDataTemplate DataType="{x:Type local:SupplierNodeViewModel}" ItemsSource="{Binding SupplierChildren}"><StackPanel Orientation="Horizontal"><Image x:Name="Imgfoldericon" Source="{Binding SupplierImageurl}" Margin="0,0,5,0" Width="16" Height="15"></Image><TextBlock Text="{Binding SupplierName}" FontFamily="Calibri" FontSize="15"/></StackPanel></HierarchicalDataTemplate></TreeView.Resources></TreeView></tlkit:AccordionItem></tlkit:Accordion></StackPanel>-->
+                <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="sidebarLft" Margin="0,-20,0,0">
+                    <Expander x:Name="ItinerariesExpander" 
+           
+           Style="{StaticResource ExpanderStyle}"
+           Cursor="Hand" Loaded="Expander_Loaded">
+                        <Expander.Header>
+                            <StackPanel HorizontalAlignment="Stretch">
+                                <TextBlock Text="Itineraries" ></TextBlock>
+                                <Button Style="{StaticResource btnBlue}" Background="Transparent" 
+                                        Foreground="#fff" Content="&#128269;" BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,-20,10,0" Click="ItinerarySearch_Click" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Expander.Header>
+                        <TreeView Name="trview" MaxWidth="200" ItemsSource="{Binding Items}"  
+              KeyUp="trview_KeyUp" MouseDoubleClick="trview_MouseDoubleClick" MaxHeight="{Binding ElementName=mainwidnowscreen, 
+                                                  Path=ActualHeight,
+                                                  ConverterParameter=230,
+                                                  Converter={StaticResource ConvertHeightRespectedWithMainWindow}}"
+              HorizontalAlignment="Stretch" Background="White" VerticalAlignment="Stretch" FontFamily="Calibri" FontSize="15" BorderThickness="0.5,0.5,0.5,0.5" AllowDrop="True" SelectedItemChanged="trview_SelectedItemChanged">
+
+                            <TreeView.ItemContainerStyle>
+                                <Style TargetType="{x:Type TreeViewItem}">
+                                    <Setter Property="IsExpanded" Value="{Binding IsExpandedItinerary, Mode=TwoWay}" />
+                                    <Setter Property="IsSelected" Value="{Binding IsSelectedItinerary, Mode=TwoWay}" />
+                                    <Setter Property="FontWeight" Value="Normal" />
+                                    <!--<EventSetter Event="TreeViewItem.MouseMove" Handler="SuppliertreeView_MouseMove"/>
+         <EventSetter Event="TreeViewItem.MouseDown" Handler="SuppliertreeView_MouseDown"/>-->
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TreeView.ItemContainerStyle>
+                            <TreeView.Resources>
+                                <!--<ContextMenu x:Key="TreeViewContextMenu">
+                                    <MenuItem Header="New" Click="NewMenuItem_Click" />
+                                    <MenuItem Header="Copy" Click="CopyMenuItem_Click" />
+                                    <MenuItem Header="Cut" Click="CutMenuItem_Click" />
+                                    <MenuItem Header="Paste" Click="PasteMenuItem_Click" />
+                                    <MenuItem Header="Delete" Click="DeleteMenuItem_Click" />
+                                    <MenuItem Header="Rename" Click="RenameMenuItem_Click" />
+                                </ContextMenu>-->
+
+                                <HierarchicalDataTemplate x:Name="ItineraryHierDataTemplate" DataType="{x:Type local:NodeViewModel}" ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image x:Name="Imgfoldericon" Source="{Binding Imageurl}" Margin="0,0,5,0" Width="16" Height="15" />
+                                        <TextBlock Text="{Binding Name}" FontFamily="Calibri" FontSize="15"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.Resources>
+
+                            <!--<TreeView.ContextMenu>
+                                <StaticResource ResourceKey="TreeViewContextMenu" />
+                            </TreeView.ContextMenu>-->
+                        </TreeView>
+                    </Expander>
+
+                    <Expander x:Name="SupplierExpander" 
+                              Header="Suppliers" Cursor="Hand"
+                              Style="{StaticResource ExpanderStyle}" Loaded="Expander_Loaded">
+                        <TreeView Name="trviewsupplier" ItemsSource="{Binding SupplierItems}" MinWidth="150" MaxWidth="250"  MouseDoubleClick="trviewsupplier_MouseDoubleClick"  
+                  KeyUp="trviewsupplier_KeyUp"
+                  HorizontalAlignment="Stretch" FontFamily="Calibri" FontSize="15" BorderThickness="0.5,0.5,0.5,0.5" VerticalAlignment="Stretch" AllowDrop="True" MaxHeight="{Binding ElementName=mainwidnowscreen, 
+                                                      Path=ActualHeight,
+                                                      ConverterParameter=230,
+                                                      Converter={StaticResource ConvertHeightRespectedWithMainWindow}}"
+
+
+>
+                            <TreeView.ItemContainerStyle>
+                                <Style TargetType="{x:Type TreeViewItem}">
+                                    <Setter Property="IsExpanded" Value="{Binding IsExpandedsupplier, Mode=TwoWay}" />
+                                    <Setter Property="IsSelected" Value="{Binding IsSelectedsupplier, Mode=TwoWay}" />
+                                    <Setter Property="FontWeight" Value="Normal" />
+                                    <EventSetter Event="TreeViewItem.MouseMove" Handler="SuppliertreeView_MouseMove"/>
+                                    <EventSetter Event="TreeViewItem.MouseDown" Handler="SuppliertreeView_MouseDown"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TreeView.ItemContainerStyle>
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type local:SupplierNodeViewModel}" ItemsSource="{Binding SupplierChildren}">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                        <Image x:Name="Imgfoldericon" Source="{Binding SupplierImageurl}" Margin="0,0,5,0" Width="16" Height="15" />
+                                        <TextBlock Text="{Binding SupplierName}" FontFamily="Calibri" FontSize="15"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.Resources>
+                        </TreeView>
+                    </Expander>
+
+                    <Expander x:Name="ContactExpander" 
+                              Header="Contacts" Cursor="Hand"
+                              Style="{StaticResource ExpanderStyle}" Loaded="Expander_Loaded">
+                        <TreeView Name="trviewcontact" ItemsSource="{Binding SupplierItems}" MinWidth="150" MaxWidth="250"  MouseDoubleClick="trviewContact_MouseDoubleClick"  
+                  
+                  HorizontalAlignment="Stretch" FontFamily="Calibri" FontSize="15" BorderThickness="0.5,0.5,0.5,0.5" VerticalAlignment="Stretch" AllowDrop="True" Height="{Binding ElementName=mainwidnowscreen, 
+                                                      Path=ActualHeight,
+                                                      ConverterParameter=230,
+                                                      Converter={StaticResource ConvertHeightRespectedWithMainWindow}}">
+                            <!--KeyUp="trviewcontact_KeyUp"  Add above-->
+                            <TreeView.ItemContainerStyle>
+                                <Style TargetType="{x:Type TreeViewItem}">
+                                    <Setter Property="IsExpanded" Value="{Binding IsExpandedcontact, Mode=TwoWay}" />
+                                    <Setter Property="IsSelected" Value="{Binding IsSelectedcontact, Mode=TwoWay}" />
+                                    <Setter Property="FontWeight" Value="Normal" />
+                                    <!--<EventSetter Event="TreeViewItem.MouseMove" Handler="ContacttreeView_MouseMove"/>
+                                    <EventSetter Event="TreeViewItem.MouseDown" Handler="ContacttreeView_MouseDown"/>-->
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TreeView.ItemContainerStyle>
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type local:SupplierNodeViewModel}" ItemsSource="{Binding SupplierChildren}">
+                                    <!--DataType="{x:Type local:ContactNodeViewModel}" Add above-->
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                        <Image x:Name="Imgfoldericon" Source="{Binding SupplierImageurl}" Margin="0,0,5,0" Width="16" Height="15" />
+                                        <TextBlock Text="{Binding SupplierName}" FontFamily="Calibri" FontSize="15"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.Resources>
+                        </TreeView>
+                    </Expander>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" Background="#f5f5f5" x:Name="righttabcontent" HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="{Binding ElementName=mainbody, Path=ActualHeight}" >
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="33"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <!--<Grid ><Grid.ColumnDefinitions><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Grid.RowDefinitions><RowDefinition Height="33"></RowDefinition><RowDefinition Height="*"></RowDefinition></Grid.RowDefinitions><StackPanel Grid.Row="0" Grid.Column="0" Panel.ZIndex="3" >-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--<ColumnDefinition Width="297.83" />-->
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="Auto" MinWidth="45" />
+                                <!--<ColumnDefinition Width="70" />-->
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="33"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <DockPanel   Grid.Row="0" Grid.Column="0" Background="Transparent"  HorizontalAlignment="Right"  Visibility="Visible"  >
+                                <Button  Style="{StaticResource btnBlue}" Name="BtnSave" Background="Transparent" Click="BtnSave_Click" FontFamily="Calibri" Height="25" FontSize="16" BorderBrush="Transparent" Foreground="#FF579F00" FontWeight="Bold" MaxWidth="79" Width="79" Cursor="Hand" MouseEnter="mouseEnterSave" MouseLeave="museLeaveOption"  Margin="0,0,0,5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/LIT.Core;component/Media/Images/save.png" Width="16" VerticalAlignment="Center"></Image>
+                                        <Label Foreground="#FF579F00" FontSize="16" VerticalAlignment="Center" Cursor="Hand">Save</Label>
+                                    </StackPanel>
+                                </Button>
+                            </DockPanel>
+                            <DockPanel Grid.Row="0" Grid.Column="1"  Background="Transparent" HorizontalAlignment="Left" Visibility="Visible" >
+                                <Button DockPanel.Dock="Right"  Style="{StaticResource btnBlue}" Click="BtnSaveandclose_Click" Name="BtnSaveandclose" FontFamily="Calibri" Height="25" Background="Transparent" FontSize="16" BorderBrush="#FF579F00" Foreground="#FF579F00" FontWeight="Bold"  MaxWidth="120" Width="120" BorderThickness="2,0,0,0" Cursor="Hand" MouseEnter="mouseEnterSaveClose" MouseLeave="museLeaveOptionSaveClose" HorizontalContentAlignment="Center" Margin="15,0,15,5" HorizontalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/LIT.Core;component/Media/Images/save.png" Width="16" VerticalAlignment="Center"></Image>
+                                        <Label Foreground="#FF579F00" FontSize="16" VerticalAlignment="Center" Cursor="Hand">Save &amp; Close</Label>
+                                    </StackPanel>
+                                </Button>
+                            </DockPanel>
+                            <Menu Grid.Column="2"   Height="30" VerticalAlignment="Center" Cursor="Hand"  Background="Transparent" HorizontalAlignment="Right"  >
+                                <MenuItem  FontFamily="Calibri" FontSize="16" Foreground="#FF579F00" FontWeight="Bold" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  BorderThickness="0,0,0,0" Margin="0,5,10,0" >
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Width="15" Source="/LIT.Core;component/Media/Images/plus.png" Margin="0,0,7,0" />
+                                            <ContentPresenter Content="New" Cursor="Hand" />
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                    <MenuItem Cursor="Hand" Name="MnuNewItinerary" Header="New Itinerary" Click="MnuNewItinerary_Click" VerticalAlignment="Stretch" Width="180" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+                                    <MenuItem Cursor="Hand" Name="MnuNewSupplier" Header="New Supplier" Margin="0,5,0,5" Click="MnuNewSupplier_Click"/>
+                                    <MenuItem Cursor="Hand" Name="MnuNewContact" Header="New Contact" Margin="0,0,0,10" Click="MnuNewContact_Click" />
+                                    <!--Click="MnuNewContact_Click" Add above-->
+                                </MenuItem>
+                            </Menu>
+                            <Menu Grid.Row="0" Grid.Column="3"   Height="33" VerticalAlignment="Center" Cursor="Hand"  Background="#f9f9f9"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"  >
+                                <MenuItem Cursor="Hand"  FontFamily="Calibri" Header="&#9776;" FontSize="16" Foreground="#FF579F00" FontWeight="Bold" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"  BorderThickness="0,0,0,0" Padding="10,6" Margin="5,0,0,0" >
+                                    <!--<MenuItem Cursor="Hand" Header="Payment" Click="OpenPaymentSupplier" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,10,0,0" Visibility="Collapsed" />-->
+                                    <MenuItem Cursor="Hand" Header="Email Log" Margin="0,5,0,5" Click="EmailLog_Click"/>
+                                    <MenuItem Cursor="Hand" Header="Supplier Payments" Margin="0,5,0,5" Click="SupplierPaymentSearch_Click" Visibility="Collapsed" />
+                                    <MenuItem Cursor="Hand" Header="Global Search" Margin="0,5,0,5" Click="GlobalSearch_Click"/>
+                                    <!--<MenuItem Name="MnuNewContact" Header="New Contact" Margin="0,0,0,10"/>-->
+                                </MenuItem>
+                            </Menu>
+                            <StackPanel  Margin="0,0,0,0" Grid.Row="0" Grid.Column="4" Background="Transparent" VerticalAlignment="Center">
+                                <!-- Bell icon -->
+                                <Button Style="{StaticResource btnBlue}" x:Name="BellButton" Height="35" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Transparent" Foreground="#fff" Background="Transparent" Cursor="Hand" >
+                                    <!-- Use a StackPanel to overlay the bell icon and notification count -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Cursor="Hand" Source="/LIT.Core;component/Media/Images/bell.png" Height="18" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        <!--<TextBlock Text="&#x1F514;" FontSize="15" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#fff" Background="Transparent" Cursor="Hand" />-->
+                                        <!-- Bell icon -->
+                                        <Border MinHeight="13" MinWidth="14" Cursor="Hand" Background="#ff0030"  CornerRadius="15" Width="Auto"  Height="Auto" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-9,-5,0,0">
+                                            <TextBlock x:Name="NotificationCountTextBlock"  Text="{Binding NotificationService.Notifications.Count}" TextAlignment="Center" FontSize="9" FontWeight="Bold" Foreground="#fff" />
+                                        </Border>
+
+                                    </StackPanel>
+                                    <Button.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Show Notifications" Click="ShowNotifications_Click"/>
+                                        </ContextMenu>
+                                    </Button.ContextMenu>
+                                </Button>
+
+                                <!-- Notifications Popup -->
+                                <Popup x:Name="NotificationsPopup" Placement="Top" PlacementTarget="{Binding ElementName=BellButton}"  IsOpen="False" StaysOpen="False" >
+                                    <Border Background="#A7D46F" BorderBrush="#A7D46F" BorderThickness="0" CornerRadius="0,0,0,0" Padding="0,0,0,10">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="3" BlurRadius="11" Color="#bc000000"/>
+                                        </Border.Effect>
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBox Padding="10" FontWeight="SemiBold" Text="Notification" Grid.Row="0" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" FontFamily="calibri" FontSize="14"  HorizontalAlignment="Left"></TextBox>
+                                                <Button Grid.Row="0" Grid.Column="1"  x:Name="ClearAllNotification" Content="&#10006; Clear All " VerticalAlignment="Center" HorizontalAlignment="Right" Template="{StaticResource ButtonBaseTemplate}" Foreground="#FF003D" Background="Transparent" BorderBrush="Transparent" Cursor="Hand" Padding="12,1,12,1" FontSize="12" Click="ClearAllNotifications_Click">
+                                                    <Button.Style>
+                                                        <Style TargetType="{x:Type Button}">
+                                                            <Setter Property="Visibility" Value="Hidden" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ElementName=NotificationList, Path=ActualHeight, Converter={StaticResource GreaterThanConverter}, ConverterParameter=10}" Value="true">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                </Button>
+
+
+                                            </Grid>
+
+                                            <TextBlock Text="No new notifications...!" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Medium" FontFamily="calibri" FontSize="14">
+                                                <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ElementName=ClearAllNotification, Path=Visibility}" Value="Visible">
+                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+
+                                            <ListView x:Name="NotificationList" MinHeight="10" MaxHeight="400" MaxWidth="600" Background="#A7D46F" BorderBrush="Transparent" BorderThickness="0">
+                                                
+                                                <ListView.View>
+
+                                                    <GridView ColumnHeaderContainerStyle="{StaticResource notifyHeaderStyle}">
+                                                        <GridViewColumn x:Name="NotificationTime"  Width="auto">
+                                                            <GridViewColumn.Header>
+                                                                <GridViewColumnHeader>
+                                                                    <Style TargetType="GridViewColumnHeader">
+                                                                        <Setter Property="Visibility" Value="Hidden"></Setter>
+                                                                        <Setter Property="Height" Value="0"></Setter>
+                                                                    </Style>
+                                                                </GridViewColumnHeader>
+
+                                                            </GridViewColumn.Header>
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Text="{Binding Timestamp}" TextWrapping="Wrap" FontFamily="Calibri" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Top" Foreground="#252E39"/>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                        <GridViewColumn x:Name="NotificationMessage"  Width="300" >
+                                                            <GridViewColumn.Header>
+                                                                <GridViewColumnHeader>
+                                                                    <Style TargetType="GridViewColumnHeader">
+                                                                        <Setter Property="Visibility" Value="Hidden"></Setter>
+                                                                        <Setter Property="Height" Value="0"></Setter>
+                                                                    </Style>
+                                                                </GridViewColumnHeader>
+
+                                                            </GridViewColumn.Header>
+                                                            <GridViewColumn.CellTemplate>
+
+                                                                <DataTemplate>
+
+                                                                    <TextBlock Text="{Binding Message}" TextWrapping="Wrap" MaxWidth="500" FontFamily="Calibri" FontSize="14" Foreground="#252E39" Padding="5" />
+
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                        <GridViewColumn Width="auto">
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <Button x:Name="ClearAllNotification" Content="&#10006;" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                                                                            Template="{StaticResource ButtonBaseTemplate}" 
+                                                                            Foreground="#FF003D"  BorderBrush="Transparent" Cursor="Hand" Padding="12,1,12,1" FontSize="12"  Click="DeleteNotification_Click"
+                                                                            CommandParameter="{Binding}" Background="Transparent"/>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+
+                                                    </GridView>
+       
+
+                                                </ListView.View>
+                                                <ListView.ItemContainerStyle>
+                                                    <Style TargetType="ListViewItem">
+                                                        <Setter Property="BorderThickness" Value="0,0,0,.5"/>
+                                                        <Setter Property="BorderBrush" Value="#FF579F00"/>
+                                                        
+                                                        <Setter Property="Margin" Value="10,0,10,0"/>
+                                                    </Style>
+                                                </ListView.ItemContainerStyle>
+
+                                            </ListView>
+                                        </StackPanel>
+                                    </Border>
+                                </Popup>
+                            </StackPanel>
+
+                        </Grid>
+                        <!--</StackPanel></Grid>-->
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Background="White" x:Name="controlTabsFill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical">
+                        <TabControl x:Name="mnuTablist" SelectionChanged="mnuTablist_SelectionChanged"  Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                            <TabControl.Resources>
+                                <DataTemplate x:Key="TabHeader" DataType="TabItem"  >
+                                    <DockPanel Width="auto">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Column="0" x:Name="txtbltabname" Grid.Row="0" Text="{Binding RelativeSource=
+            {RelativeSource AncestorType={x:Type TabItem}}, Path=Header}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxWidth="300" Cursor="Hand">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelected,
+                        RelativeSource={RelativeSource AncestorType=TabItem}}" 
+                            Value="True">
+                                                                <Setter Property="FontWeight" Value="Bold"/>
+                                                                <Setter Property="Foreground" Value="White"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <Button Grid.Column="1" Grid.Row="0" Name="btnDelete" DockPanel.Dock="Right" Cursor="Hand"
+                 Margin="10,0,0,0" Padding="0" Click="btnDelete_Click" 
+                 CommandParameter="{Binding RelativeSource=
+                 {RelativeSource AncestorType={x:Type TabItem}}, Path=Uid}" Background="Transparent" BorderThickness="0" Style="{StaticResource btnBlue}">
+                                                <Image Source="/LIT.Core;component/Media/Images/delete.png" Height="10" Width="11"></Image>
+                                            </Button>
+                                        </Grid>
+                                    </DockPanel>
+                                </DataTemplate>
+                                <ControlTemplate x:Key="CustomTabItemTemplate" TargetType="TabItem">
+                                    <Grid Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                        CornerRadius="0,10,0,0">
+                                            <ContentPresenter 
+        ContentSource="Header" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" />
+                                        </Border>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="#579f00" />
+                                            <Setter TargetName="Border" Property="BorderBrush" Value="#579f00" />
+                                            <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="White" />
+                                            <Setter TargetName="Border" Property="BorderBrush" Value="#c9c9c9" />
+                                            <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                                    <Setter Property="AcceptsReturn" Value="True"></Setter>
+                                    <Setter Property="TextWrapping" Value="WrapWithOverflow"></Setter>
+                                    <Setter Property="MaxLines" Value="5000"></Setter>
+                                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" 
+             Value="Auto"></Setter>
+                                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" 
+             Value="Auto"></Setter>
+                                </Style>
+                            </TabControl.Resources>
+                            <TabControl.Template>
+                                <ControlTemplate x:Name="MainWindowtab" TargetType="{x:Type TabControl}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40" />
+                                            <RowDefinition Height="50*" />
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.Column="0" Grid.Row="0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="35" />
+                                                    <ColumnDefinition Width="40" />
+                                                </Grid.ColumnDefinitions>
+                                                <local:UniformTabPanel Grid.Column="0" x:Name="HeaderPanel"  />
+                                                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding ElementName=HeaderPanel, Path=ActualWidth, 
+                                                    Converter={StaticResource WidthToVisibilityConverter}, ConverterParameter=100}">
+                                                    <Button Style="{StaticResource btnBlue}" x:Name="btnPreviousTab" Height="30" FontFamily="Calibri" FontSize="16" Background="Transparent" FontWeight="Bold" Cursor="Hand" HorizontalAlignment="Right"  VerticalAlignment="Bottom"  Margin="0,0,2,0" Click="btnPreviousTab_Click" ToolTip="Previous">
+                                                        <Image Width="15" Source="/LIT.Core;component/Media/Images/prev-arrow.png"></Image>
+                                                    </Button>
+                                                    <Button Style="{StaticResource btnBlue}" x:Name="btnNextTab" Height="30" FontFamily="Calibri" FontSize="16" Background="Transparent" FontWeight="Bold" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,0,0,0" Click="btnNextTab_Click" ToolTip="Next" >
+                                                        <Image Width="15" Source="/LIT.Core;component/Media/Images/next-arrow.png"></Image>
+                                                    </Button>
+                                                </StackPanel>
+                                                <StackPanel Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding ElementName=HeaderPanel, Path=ActualWidth, 
+                                                    Converter={StaticResource WidthToVisibilityConverter}, ConverterParameter=100}">
+                                                    <Button Name="btnDeletetab" Padding="0" Click="btnDeletetab_Click" Cursor="Hand"  Margin="10,0,0,0" VerticalAlignment="Bottom" ToolTip="Delete" Background="Transparent" BorderThickness="0" Style="{StaticResource btnBlue}">
+                                                        <Image Source="/LIT.Core;component/Media/Images/delete.png" Height="15" Width="15" ></Image>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                        <Border x:Name="Border" Grid.Row="1" 
+                            BorderThickness="1"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"  >
+                                            <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
+                                        </Border>
+                                    </Grid>
+                                </ControlTemplate>
+                            </TabControl.Template>
+                        </TabControl>
+                    </StackPanel>
+                    <TextBlock Visibility="Collapsed" x:Name="hdnselectedmenu" ></TextBlock>
+                </Grid>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+    <!-- My code End -->
+</Window>

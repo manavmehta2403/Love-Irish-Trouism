@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/LIT.Core;component/Themes/Generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!-- Define the base style for LibraryTreeViewItem -->
+    <Style x:Key="LibraryTreeViewItemBaseStyle" TargetType="{x:Type TreeViewItem}">
+        <Setter Property="FontWeight" Value="Normal" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="FontWeight" Value="Bold" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Style for LibraryTreeViewItemSupplier, inherits from the base style -->
+    <Style x:Key="LibraryTreeViewItemStyleSupplier" TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource LibraryTreeViewItemBaseStyle}">
+        <!-- Add any specific setters for LibraryTreeViewItemSupplier here -->
+    </Style>
+
+    <!-- Style for LibraryTreeViewItemItinerary, inherits from the base style -->
+    <Style x:Key="LibraryTreeViewItemStyleItinerary" TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource LibraryTreeViewItemBaseStyle}">
+        <!-- Add any specific setters for LibraryTreeViewItemItinerary here -->
+    </Style>
+</ResourceDictionary>

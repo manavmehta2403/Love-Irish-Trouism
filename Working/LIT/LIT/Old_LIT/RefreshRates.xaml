@@ -1,0 +1,486 @@
+﻿<Window x:Class="LIT.Old_LIT.RefreshRates"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:behavior="clr-namespace:LIT.Core.Behaviors;assembly=LIT.Core"
+        xmlns:local="clr-namespace:LIT"
+        mc:Ignorable="d"
+        Title="Refresh Rates" MinHeight="650" Width="900" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/PasswordBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ScrollBarStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#f5f5f5">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition  Height="50"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Background="#f5f5f5" Padding="15 5 5 5" BorderBrush="#ccc" BorderThickness="0 1 1 1" >
+                    <Grid VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition MinWidth="50" Width="*"/>
+                            <ColumnDefinition MinWidth="50" Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="lblItinstartDate" Grid.Column="0" Grid.Row="0" Content="Itinerary Start Date" FontFamily="Calibri" Width="150" Height="30" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <DatePicker Cursor="Hand"  Grid.Column="1" Grid.Row="0" x:Name="TxtStartDate" Background="white" FontFamily="Calibri"  MinWidth="50" Height="24" FontSize="14" VerticalContentAlignment="Center" Padding="5,0,5,0" BorderBrush="#FFA1A1A1" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <DatePicker Cursor="Hand"  Grid.Column="2" Grid.Row="0" x:Name="TxtStartDate2" Background="white" FontFamily="Calibri" MinWidth="50" Height="24" FontSize="14" VerticalContentAlignment="Center" Padding="5,0,5,0" BorderBrush="#FFA1A1A1" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" Background="#f5f5f5" Padding="20 5 5 5                                                                                                                                                                                                                                                     " BorderBrush="#ccc" BorderThickness="0 1 0 1" >
+                    <Grid  VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition MinWidth="50" Width="*"/>
+                            <ColumnDefinition MinWidth="50" Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="lblItinEndDate" Grid.Column="0" Grid.Row="0" Content="Itinerary End Date" FontFamily="Calibri" Width="150" Height="30" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <DatePicker Cursor="Hand"  Grid.Column="1" Grid.Row="0" x:Name="TxtEndDate" Background="white" FontFamily="Calibri" MinWidth="50" Height="24" FontSize="14" VerticalContentAlignment="Center" Padding="5,0,5,0" BorderBrush="#FFA1A1A1" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <DatePicker Cursor="Hand"   Grid.Column="2" Grid.Row="0" x:Name="TxtEndDate2" Background="white" FontFamily="Calibri" MinWidth="50"  Height="24" FontSize="14" VerticalContentAlignment="Center" Padding="5,0,5,0" BorderBrush="#FFA1A1A1" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Background="#f5f5f5" Padding="20 5 5 5" BorderBrush="#ccc" BorderThickness="0 0 0 1">
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="480"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <CheckBox Grid.Column="0" Cursor="Hand" x:Name="chbSelectedsameno" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,0" />
+                        <Label x:Name="lblItin" Grid.Column="1"  Grid.Row="0" Content="Also move end date and selected booking by same numbers of the days" FontFamily="Calibri" Width="350" Height="30" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Background="#f5f5f5" VerticalAlignment="Top" >
+
+            <DataGrid Cursor="Hand"  x:Name="dgBookingRefreshedited" BorderThickness="1,1,1,1" BorderBrush="#c9c9c9" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalGridLinesBrush="#C9C9C9" VerticalGridLinesBrush="#C9C9C9"  Background="White"  HorizontalAlignment="Left" MaxHeight="400" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" BeginningEdit="dgBookingRefreshedited_BeginningEdit"  Margin="5,0,5,0"
+                        SelectedCellsChanged="dgBookingRefreshedited_SelectedCellsChanged"
+                           RowDetailsVisibilityMode="VisibleWhenSelected" behavior:NewSingleClickDataGridBehavior.EnableSingleClickEditing="True"
+                       >
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ItineraryID" Binding="{Binding ItineraryID}" FontSize="14" FontFamily="Calibri" Visibility="Hidden" />
+                    <DataGridTextColumn Header="SupplierID" Binding="{Binding SupplierID}" FontSize="14" FontFamily="Calibri" Visibility="Hidden" />
+                    <DataGridTextColumn Header="ServiceTypeID" Binding="{Binding ServiceTypeID}" FontSize="14" FontFamily="Calibri"  Visibility="Hidden" />
+                    <DataGridTextColumn Header="ServiceID" Binding="{Binding ServiceID}" FontSize="14" FontFamily="Calibri"  Visibility="Hidden" />
+                    <DataGridTextColumn Header="PricingOptionId" Binding="{Binding PricingOptionId}" FontSize="14" FontFamily="Calibri" Visibility="Hidden" />
+                    <DataGridTextColumn Header="PricingRateID" Binding="{Binding PricingRateID}" FontSize="14" FontFamily="Calibri" Visibility="Hidden" />
+
+                    <DataGridCheckBoxColumn  Width="50" Header="Selected" x:Name="ChbSelectedIdforRefresh" Binding="{Binding SelectedIdforRefresh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                        <!--<DataGridCheckBoxColumn.CellStyle>
+                            <Style>
+                                <EventSetter Event="CheckBox.Checked" Handler="ChbInvoicedChecked"/>
+                            </Style>
+                        </DataGridCheckBoxColumn.CellStyle>-->
+                        <DataGridCheckBoxColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri" />
+                            </Style>
+                        </DataGridCheckBoxColumn.HeaderStyle>
+                        <DataGridCheckBoxColumn.ElementStyle >
+                            <Style TargetType="CheckBox">
+                                <Setter Property="IsChecked" Value="{Binding SelectedIdforRefresh}"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontFamily" Value="Calibri" />
+                                <Setter Property="FontSize" Value="14" />                                
+                            </Style>
+                        </DataGridCheckBoxColumn.ElementStyle>
+                        <DataGridCheckBoxColumn.EditingElementStyle>
+                            <Style TargetType="CheckBox">
+                                <Setter Property="IsChecked" Value="{Binding SelectedIdforRefresh, Mode=OneWay}"/>
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontFamily" Value="Calibri" />
+                            </Style>
+                        </DataGridCheckBoxColumn.EditingElementStyle>
+                    </DataGridCheckBoxColumn>
+
+                    <DataGridTextColumn Header="Booking Name" x:Name="DgBookingName" Binding="{Binding BookingName}" FontSize="14" FontFamily="Calibri" FontWeight="Regular" Width="*" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Padding" Value="5 0 0 0" />
+                                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Item Description" x:Name="DgItemDescription" Binding="{Binding ItemDescription}" FontSize="14" FontFamily="Calibri" FontWeight="Regular" Width="*" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Padding" Value="5 0 0 0" />
+                                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Old Date" x:Name="DgoldDate" Width="100" IsReadOnly="True">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker  x:Name="TxtOldstartdt" SelectedDate="{Binding OldStartDate, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0" IsEnabled="False" >
+                                    <DatePicker.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </DatePicker.Background>
+                                </DatePicker>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <Grid FocusManager.FocusedElement="{Binding ElementName= TxtOldstartdt}" >
+                                    <DatePicker  x:Name="TxtOldstartdt" SelectedDate="{Binding OldStartDate, UpdateSourceTrigger=PropertyChanged}" FontFamily="Calibri" Width="223" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0"  >
+                                        <DatePicker.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="White"/>
+                                                <GradientStop Color="White" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </DatePicker.Background>
+                                    </DatePicker>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="New Start Date" x:Name="DgNewDate" Width="100">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DataTemplate.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="3" />
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    </Style>
+                                </DataTemplate.Resources>
+                                <!--<DatePicker x:Name="TxtNewstartdt" SelectedDate="{Binding NewStartDate, Mode=TwoWay}" FontFamily="Calibri" Width="100" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0">  
+                                    <DatePicker.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </DatePicker.Background>
+                                </DatePicker>-->
+                                <TextBlock Grid.Column="1" Text="{Binding NewStartDate,StringFormat={}{0:dd/MM/yyyy}}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <Grid FocusManager.FocusedElement="{Binding ElementName= TxtNewstartdt}" >
+                                    <DatePicker  x:Name="TxtNewstartdt"  SelectedDate="{Binding NewStartDate}"  FontFamily="Calibri" Width="223" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0" >
+                                        <!--<DatePicker x:Name="TxtNewstartdt"  SelectedDate="{Binding NewStartDate,Mode=TwoWay}" FontFamily="Calibri" Width="223" Height="24" FontSize="14" BorderBrush="#FFA1A1A1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" BorderThickness="0,0,0,0" SelectedDateChanged="TxtNewstartdt_SelectedDateChanged">-->
+                                        <!--<DatePicker.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="White"/>
+                                                <GradientStop Color="White" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </DatePicker.Background>-->
+                                    </DatePicker>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Nt/Days" x:Name="chbNt" Binding="{Binding NtsDays}" FontSize="14" FontFamily="Calibri" FontWeight="Regular" Width="50" IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn Header="Old Net" x:Name="DgOldNet" Width="142" IsReadOnly="True">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DataTemplate.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="3" />
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    </Style>
+                                </DataTemplate.Resources>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding BkgCurDisplayFormat }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" />
+                                    <TextBlock Grid.Column="1" Text="{Binding OldNetunit,StringFormat=N2}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="New Net" x:Name="DgNewNet"  Width="142" IsReadOnly="True">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DataTemplate.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="3" />
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    </Style>
+                                </DataTemplate.Resources>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding BkgCurDisplayFormat }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" />
+                                    <TextBlock Grid.Column="1" Text="{Binding NewNetunit,StringFormat=N2}" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0"  />
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+
+
+                    <DataGridTemplateColumn Header="Result" x:Name="DgResult"  Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DataTemplate.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataTemplate.Resources>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <!--<TextBlock Grid.Column="0" Text="{Binding Resultmsgurl }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" />-->
+                                    <Image Grid.Column="0" x:Name="Imgicon" Source="{Binding Resultmsgurl}" Margin="0,0,5,0" Width="30" Height="25"></Image>
+                                    <TextBlock Grid.Column="1" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Left" Padding="0,0,5,0" Margin="0,0,5,0"  ToolTip="{Binding Resultmsg}" ToolTipOpening="TextBlock_ToolTipOpening" >
+                                       
+                                    <Hyperlink NavigateUri="{Binding Resultmsg}" Click="Hyperlink_Click">
+                                        <TextBlock Text="{Binding Resultmsg}">
+                                            
+                                        </TextBlock>
+                                    </Hyperlink>
+                                         </TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Warning" x:Name="DgWarning" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Foreground" Value="#252E39" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontFamily" Value="Calibri"/>
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <DataTemplate.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="3" />
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    </Style>
+                                </DataTemplate.Resources>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                    </Grid.ColumnDefinitions>
+                                    <!--<TextBlock Grid.Column="0" Text="{Binding Resultmsgurl }" FontFamily="Calibri" FontSize="14" HorizontalAlignment="Right" Padding="0,0,5,0" Margin="0,0,5,0" />-->
+
+                                    <Image Grid.Column="0" x:Name="Imgicon" Source="{Binding Warningmsgurl}" Margin="0,0,5,0" Width="40" Height="25" MouseDown="Imgicon_MouseDown" ToolTip="Click to view warnings" Cursor="Hand" ></Image>
+
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" Background="#f5f5f5" VerticalAlignment="Center"  >
+            <Grid  HorizontalAlignment="Right"  Grid.ColumnSpan="2"  Margin="0 10 0 10"  VerticalAlignment="Center" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Content="Refresh Rates" Template="{StaticResource ButtonBaseTemplate}" Padding="30,4,5,5" Name="btnRefreshRates"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,20,0" VerticalContentAlignment="Center" FontFamily="Calibri" Height="28" FontSize="14"  BorderBrush="#c9c9c9" Foreground="#252e39" FontWeight="Normal" MaxWidth="140" Width="155" Cursor="Hand"  Click="btnRefreshRates_Click" >
+                    <Button.Background>
+                        <SolidColorBrush Color="White" Opacity="1"/>
+                    </Button.Background>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="3"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="3" Background="#f5f5f5">
+            <Border BorderBrush="#ccc" BorderThickness="0 1 0 0">
+                <Grid  HorizontalAlignment="Right"  Grid.ColumnSpan="2"  Margin="0 10 0 10"  VerticalAlignment="Center" Height="50" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="Confirm" Grid.Column="0" Template="{StaticResource ButtonBaseTemplate}" Padding="20,5,20,5" Name="btnConfirm"   HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0" VerticalContentAlignment="Center" FontFamily="Calibri" Height="28" FontSize="14"  BorderBrush="#c9c9c9" Foreground="#252e39" FontWeight="Normal"  Cursor="Hand"  Click="btnConfirm_Click" >
+                        <Button.Background>
+                            <SolidColorBrush Color="White" Opacity="1"/>
+                        </Button.Background>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button Content="Cancel" Grid.Column="1" Template="{StaticResource ButtonBaseTemplate}" Padding="20,5,20,5" Name="btnCancelRefreshRates"   HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0" VerticalContentAlignment="Center" FontFamily="Calibri" Height="28" FontSize="14"  BorderBrush="#c9c9c9" Foreground="#252e39" FontWeight="Normal" Cursor="Hand"  Click="btnCancelRefreshRates_Click" >
+                        <Button.Background>
+                            <SolidColorBrush Color="#FF579F00" Opacity="0"/>
+                        </Button.Background>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="1"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                </Grid>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</Window>

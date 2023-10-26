@@ -1,0 +1,158 @@
+﻿<Window x:Class="LIT.Views.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:core="clr-namespace:LIT.Core.Mvvm;assembly=LIT.Core"
+        xmlns:behaviors="clr-namespace:LIT.Core.Behaviors;assembly=LIT.Core"
+        xmlns:controls="clr-namespace:LIT.Core.Controls;assembly=LIT.Core"
+        xmlns:resGridex="clr-namespace:LIT.Core.Controls.GridExtensions;assembly=LIT.Core"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:viewmodels="clr-namespace:LIT.ViewModels" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/PasswordBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="/LIT.Core;component/Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.Background>
+        <ImageBrush ImageSource="/LIT.Core;component/Media/Images/login_bg.png" />
+    </Window.Background>
+
+
+    <controls:ResponsivePanel IsCentered="True">
+
+        <Canvas MinWidth="356" 
+                    MinHeight="320" 
+                    HorizontalAlignment="center" 
+                    VerticalAlignment="Center" 
+                    Background="White" 
+                    Grid.ColumnSpan="2" 
+                    Margin="0,0,0,0">
+
+            <Image Height="68" 
+                   Source="/LIT.Core;component/Media/Images/LIV_logo.png" 
+                   Stretch="Fill" 
+                   Width="130" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Canvas.Left="115" 
+                   Canvas.Top="17"/>
+
+            <Label x:Name="LoginNow" 
+                   FontFamily="Calibri" 
+                   Width="126" 
+                   Height="35" 
+                   FontSize="20" 
+                   Content="LOGIN NOW" 
+                   VerticalAlignment="Top" 
+                   FontWeight="SemiBold" 
+                   Canvas.Top="78" 
+                   Canvas.Left="115" 
+                   Background="{x:Null}" 
+                   Foreground="#FF252E39" 
+                   HorizontalAlignment="Center" 
+                   HorizontalContentAlignment="Center"/>
+            <Label x:Name="LblUserName"  
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   FontFamily="Calibri" 
+                   Width="234" 
+                   Height="30" 
+                   FontSize="14" 
+                   Content="Username" 
+                   Canvas.Left="25" 
+                   Canvas.Top="111" 
+                   Foreground="#FF686C78"/>
+            <TextBox x:Name="TxtUserName" 
+                     Text="{Binding UserName}" 
+                     FontFamily="Calibri" 
+                     Width="300" 
+                     Height="30" 
+                     FontSize="14" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     Canvas.Left="28" 
+                     Canvas.Top="141" 
+                     Background="#FFFAFAFA" 
+                     BorderBrush="#FFDEDEDE" 
+                     BorderThickness="1"
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,2,0" />
+            <Label x:Name="LblPassword" 
+                    HorizontalAlignment="Center" 
+                    FontFamily="Calibri" 
+                    Width="234" 
+                    Height="28" 
+                    FontSize="14" 
+                    VerticalAlignment="Top" 
+                    Content="Password" 
+                    Canvas.Left="25" 
+                    Canvas.Top="176" 
+                    Foreground="#FF686C78" />
+
+            <controls:BindablePasswordBox x:Name="TxtPassword" 
+                                          Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                                          FontFamily="Calibri" 
+                                          Width="300" 
+                                          Height="30" 
+                                          FontSize="12" 
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Top" 
+                                          Canvas.Left="28" 
+                                          Canvas.Top="204" 
+                                          Background="#FFFAFAFA" 
+                                          BorderBrush="#FFDEDEDE" 
+                                          BorderThickness="1"
+                                          VerticalContentAlignment="Center" 
+                                          Padding="5,0,9,0" 
+                                          KeyDown="TxtPassword_KeyDown">
+                <x:Code>
+                    <![CDATA[  
+private void TxtPassword_KeyDown(object sender, KeyEventArgs e)
+{
+      if (e.Key == Key.Enter)
+        {                    
+                if (btnLogin.Command != null && btnLogin.Command.CanExecute(null))
+                {
+                    btnLogin.Command.Execute(null);
+                }
+        }
+}
+]]>
+                </x:Code>
+            </controls:BindablePasswordBox>
+
+            <Button x:Name="btnLogin" 
+                    Content="Sign In"
+                    Style="{StaticResource btnBlue}" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    Command="{Binding LoginCommand}" 
+                    FontFamily="Calibri" 
+                    Width="300" 
+                    Height="40" 
+                    FontSize="16" 
+                    Canvas.Left="28" 
+                    Canvas.Top="254" 
+                    Background="#FF579F00" 
+                    BorderBrush="#FF579F00" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    UseLayoutRounding="True" 
+                    Cursor="Hand" />
+
+            <!-- Add loading animation or progress bar here (e.g., using Visibility and a DataTrigger) -->
+            <!-- ... -->
+        </Canvas>
+    </controls:ResponsivePanel>
+</Window>
